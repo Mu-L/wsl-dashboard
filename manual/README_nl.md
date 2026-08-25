@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - [💻 Systeemvereisten](#-systeemvereisten)
 - [📦 Installatiehandleiding](#-installatiehandleiding)
 - [🛠️ Tech Stack & Prestaties](#️-tech-stack--prestaties)
+- [📢 Officiële Gemeenschapsgroepen](#-officiële-gemeenschapsgroepen)
 - [🤝 Community Steun](#-community-steun)
 - [❤️ Ondersteun dit project](#️-ondersteun-dit-project)
 - [⭐️ Liefdeswerk](#️-liefdeswerk)
@@ -110,8 +111,10 @@ Engels, Vereenvoudigd Chinees, Traditioneel Chinees, Hindi, Spaans, Frans, Arabi
 - **Moderne Native UI**: Intuïtieve GUI met ondersteuning voor Donkere/Lichte modus, vloeiende animaties en hoogwaardige rendering aangedreven door **Skia**.
 - **Systeemvak-integratie (Tray)**: Volledige ondersteuning voor minimaliseren naar het systeemvak (geheugengebruik ~10 MB), dubbelklikken om te schakelen en een functioneel rechtsklikmenu.
 - **Intelligente Startup**: Configureer het dashboard om met Windows te starten, te minimaliseren naar het systeemvak (stille modus met `/silent`), en distributies automatisch af te sluiten bij het afsluiten.
+- **Taakplanning**: Flexibel taakplanningsbeheer dat de automatische uitvoering van scripts en opdrachten in WSL-instanties op specifieke tijdstippen of intervallen ondersteunt voor geautomatiseerde bewerkingen.
 - **Uitgebreid beheer**: Start, Stop, Beëindig en Verwijder registratie met één klik. Realtime statusbewaking en gedetailleerd inzicht in schijfgebruik en bestandslocaties.
 - **Distro beheer**: Instellen als standaard, migratie (VHDX verplaatsen naar andere schijven), en exporteren/klonen naar `.tar` of `.tar.gz` archieven.
+- **Schijfkoppeling**: Koppel en beheer VHDX virtuele schijven van WSL-instanties direct, met ondersteuning voor koppelen, ontkoppelen en schijfbeheer, waardoor bestandsoverdracht tussen de host en WSL eenvoudig wordt.
 - **Snelle integratie**: Direct starten in Terminal, VS Code of Verkenner met aanpasbare werkmappen en startup script-hooks.
 - **Distributie-installatie**: Installeer Linux-distributies via Microsoft Store, GitHub, lokale bestanden (RootFS/VHDX) of online mirrors (met automatische snelheidstest om de snelste mirror te kiezen en ingebouwde RootFS download-helper).
 - **Veiligheid**: Mutex-locks voor veilige gelijktijdige migratie-/backup-operaties en automatische opschoning van Appx bij verwijdering.
@@ -176,6 +179,18 @@ Logbestanden worden naar de geconfigureerde logmap geschreven en kunnen worden b
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Schijfkoppeling
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Taakplanning
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Demonstratie
@@ -266,6 +281,17 @@ Zorg ervoor dat de Rust-toolchain (Rust 1.92 of nieuwer) is geïnstalleerd.
   - **Portabiliteit**: Geoptimaliseerde release-build produceert een enkele compacte executable.
 
 
+
+## 📢 Officiële Gemeenschapsgroepen
+
+Welkom bij de officiële WSL UI gemeenschapsgroepen! Sluit je aan bij onze kanalen om gebruikstips te bespreken, problemen te melden, de nieuwste updates te krijgen en verbinding te maken met ontwikkelaars en andere gebruikers.
+
+| Wereldwijde Groep (Telegram) | Chinese Groep (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Scan om lid te worden | Scan om lid te worden |
+
+---
 
 ## 🤝 Community Steun
 

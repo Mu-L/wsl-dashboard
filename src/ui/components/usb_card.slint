@@ -23,12 +23,13 @@ component UsbDeviceInfo inherits VerticalLayout {
     // BusId + Auto label on same row
     HorizontalLayout {
         spacing: 4px;
-        alignment: start;
+        alignment: is-rtl ? end : start;
         Text {
             text: (is-rtl ? device.bus_id + " BusId" : "BusId " + device.bus_id);
             font-size: 11px;
             font-family: Theme.default_font;
             color: Theme.text_secondary;
+            horizontal-alignment: is-rtl ? right : left;
         }
         if (device.boot_attach): Text {
             text: "Boot";
@@ -40,7 +41,7 @@ component UsbDeviceInfo inherits VerticalLayout {
     }
 }
 
-// USB Badge: Icon + Auto Tag
+// USB Badge: Icon + Auto Tag (overlay)
 component UsbBadge inherits VerticalLayout {
     in property <UsbDevice> device;
     width: 32px; // Match DistroBadge
@@ -48,8 +49,18 @@ component UsbBadge inherits VerticalLayout {
     Rectangle {
         width: 32px;
         height: 32px;
+        Text {
+            y: 7px;
+            text: "\u{E88E}";
+            font-family: Theme.icon_font;
+            font-size: 20px;
+            color: device.status == "Attached" ? Theme.accent : 
+                   device.status == "Shared" ? Theme.icon_color_navigation : 
+                   Theme.icon_color_amber;
+            horizontal-alignment: center;
+        }
         if (device.auto_attach): Rectangle {
-            y: 0px;
+            y: parent.height - self.height - 1px;
             x: (parent.width - self.width) / 2;
             width: 30px; // Slightly smaller for 32px badge
             height: 14px;
@@ -64,16 +75,6 @@ component UsbBadge inherits VerticalLayout {
                 horizontal-alignment: center;
                 vertical-alignment: center;
             }
-        }
-        Text {
-            y: (device.boot_attach) ? 14px : 7px;
-            text: "\u{E88E}";
-            font-family: Theme.icon_font;
-            font-size: 20px;
-            color: device.status == "Attached" ? Theme.accent : 
-                   device.status == "Shared" ? Theme.icon_color_navigation : 
-                   Theme.icon_color_amber;
-            horizontal-alignment: center;
         }
     }
 }

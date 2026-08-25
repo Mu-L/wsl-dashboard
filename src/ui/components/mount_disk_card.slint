@@ -1,0 +1,240 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 owu <wqh@live.com>
+// SPDX-License-Identifier: GPL-3.0-only
+
+import { Theme, AppI18n, LayoutConstants, MountedDiskInfo } from "../theme.slint";
+import { ActionIcon } from "common.slint";
+
+export component MountDiskCard inherits Rectangle {
+    in property <MountedDiskInfo> disk;
+    in property <bool> busy: false;
+    callback unmount_clicked(string);
+    callback delete_clicked(string);
+    callback mount_clicked(string);
+
+    height: 48px;
+    background: Theme.card_bg;
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: Theme.border_color;
+
+    HorizontalLayout {
+        padding-left: 12px;
+        padding-right: 12px;
+
+        // --- LTR layout: Icon | Info | Spacer | mount_time | Actions ---
+        if (!AppI18n.is-rtl): HorizontalLayout {
+            spacing: 12px;
+
+            // Disk Type Icon
+            VerticalLayout {
+                alignment: center;
+                Text {
+                    text: disk.disk_type == "physical" ? "\u{eda2}" : "\u{e958}"; // HardDrive / StorageOptical icon
+                    font-family: Theme.icon_font;
+                    font-size: 18px;
+                    color: disk.disk_type == "physical" ? #0284c7 : #8b5cf6;
+                }
+            }
+
+            // Information Column
+            Rectangle {
+                max-width: 400px;
+                VerticalLayout {
+                    alignment: center;
+                    spacing: 2px;
+
+                    HorizontalLayout {
+                        spacing: 8px;
+                        horizontal-stretch: 0;
+                        Text {
+                            text: disk.mount_point;
+                            font-size: 12px * LayoutConstants.font-scale;
+                            font-weight: 500;
+                            font-family: Theme.default_font;
+                            color: Theme.text_primary;
+                            overflow: elide;
+                        }
+                    }
+
+                    HorizontalLayout {
+                        spacing: 12px;
+                        Text {
+                            text: disk.disk_path;
+                            font-size: 11px * LayoutConstants.font-scale;
+                            font-family: Theme.default_font;
+                            color: Theme.text_secondary;
+                            overflow: elide;
+                        }
+                    }
+                }
+            }
+
+            // Spacer
+            Rectangle { horizontal-stretch: 1; }
+
+            // Mount time (before action icons)
+            VerticalLayout {
+                alignment: center;
+                Text {
+                    text: disk.mount_time;
+                    font-size: 11px * LayoutConstants.font-scale;
+                    font-family: Theme.default_font;
+                    color: Theme.text_secondary;
+                    vertical-alignment: center;
+                }
+            }
+
+            // Actions: Mount/Unmount + Delete
+            HorizontalLayout {
+                spacing: 8px;
+                alignment: center;
+
+                // Mount/Unmount icon (based on mount status)
+                if (disk.is_mounted): VerticalLayout {
+                    alignment: center;
+                    ActionIcon {
+                        icon: "\u{ECC9}"; // Detach/Unmount icon
+                        is_font_icon: true;
+                        show_shield: true;
+                        icon_type: "danger";
+                        tooltip: AppI18n.t("mount_disk.unmount", [AppI18n.version]);
+                        clicked => { root.unmount_clicked(disk.disk_path); }
+                    }
+                }
+                if (!disk.is_mounted): VerticalLayout {
+                    alignment: center;
+                    ActionIcon {
+                        icon: "\u{ECC8}"; // Mount/Attach icon
+                        is_font_icon: true;
+                        show_shield: true;
+                        icon_type: "sky";
+                        tooltip: AppI18n.t("mount_disk.mount", [AppI18n.version]);
+                        clicked => { root.mount_clicked(disk.disk_path); }
+                    }
+                }
+
+                // Delete (unmount + remove from config)
+                VerticalLayout {
+                    alignment: center;
+                    ActionIcon {
+                        icon: "\u{E74D}"; // Delete icon
+                        is_font_icon: true;
+                        show_shield: true;
+                        icon_type: "rose";
+                        tooltip: AppI18n.t("mount_disk.delete", [AppI18n.version]);
+                        clicked => { root.delete_clicked(disk.disk_path); }
+                    }
+                }
+            }
+        }
+
+        // --- RTL layout (mirrored): Actions | mount_time | Spacer | Info | Icon ---
+        if (AppI18n.is-rtl): HorizontalLayout {
+            spacing: 12px;
+
+            // Actions (mirrored order)
+            HorizontalLayout {
+                spacing: 8px;
+                alignment: center;
+
+                // Delete (unmount + remove from config)
+                VerticalLayout {
+                    alignment: center;
+                    ActionIcon {
+                        icon: "\u{E74D}"; // Delete icon
+                        is_font_icon: true;
+                        show_shield: true;
+                        icon_type: "rose";
+                        tooltip: AppI18n.t("mount_disk.delete", [AppI18n.version]);
+                        clicked => { root.delete_clicked(disk.disk_path); }
+                    }
+                }
+
+                // Mount/Unmount icon (based on mount status)
+                if (disk.is_mounted): VerticalLayout {
+                    alignment: center;
+                    ActionIcon {
+                        icon: "\u{ECC9}"; // Detach/Unmount icon
+                        is_font_icon: true;
+                        show_shield: true;
+                        icon_type: "danger";
+                        tooltip: AppI18n.t("mount_disk.unmount", [AppI18n.version]);
+                        clicked => { root.unmount_clicked(disk.disk_path); }
+                    }
+                }
+                if (!disk.is_mounted): VerticalLayout {
+                    alignment: center;
+                    ActionIcon {
+                        icon: "\u{ECC8}"; // Mount/Attach icon
+                        is_font_icon: true;
+                        show_shield: true;
+                        icon_type: "sky";
+                        tooltip: AppI18n.t("mount_disk.mount", [AppI18n.version]);
+                        clicked => { root.mount_clicked(disk.disk_path); }
+                    }
+                }
+            }
+
+            // Mount time (after actions, before spacer)
+            VerticalLayout {
+                alignment: center;
+                Text {
+                    text: disk.mount_time;
+                    font-size: 11px * LayoutConstants.font-scale;
+                    font-family: Theme.default_font;
+                    color: Theme.text_secondary;
+                    vertical-alignment: center;
+                }
+            }
+
+            // Spacer
+            Rectangle { horizontal-stretch: 1; }
+
+            // Information Column
+            Rectangle {
+                max-width: 400px;
+                VerticalLayout {
+                    alignment: center;
+                    spacing: 2px;
+
+                    HorizontalLayout {
+                        spacing: 8px;
+                        alignment: end;
+                        horizontal-stretch: 0;
+                        Text {
+                            text: disk.mount_point;
+                            font-size: 12px * LayoutConstants.font-scale;
+                            font-weight: 500;
+                            font-family: Theme.default_font;
+                            color: Theme.text_primary;
+                            overflow: elide;
+                        }
+                    }
+
+                    HorizontalLayout {
+                        spacing: 12px;
+                        alignment: end;
+                        Text {
+                            text: disk.disk_path;
+                            font-size: 11px * LayoutConstants.font-scale;
+                            font-family: Theme.default_font;
+                            color: Theme.text_secondary;
+                            overflow: elide;
+                        }
+                    }
+                }
+            }
+
+            // Disk Type Icon
+            VerticalLayout {
+                alignment: center;
+                Text {
+                    text: disk.disk_type == "physical" ? "\u{eda2}" : "\u{e958}"; // HardDrive / StorageOptical icon
+                    font-family: Theme.icon_font;
+                    font-size: 18px;
+                    color: disk.disk_type == "physical" ? #0284c7 : #8b5cf6;
+                }
+            }
+        }
+    }
+}

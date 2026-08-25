@@ -21,12 +21,24 @@ component DistroInfo inherits VerticalLayout {
         horizontal-alignment: is-rtl ? right : left;
     }
 
-    Text {
-        text: AppI18n.t(distro.status == "Running" ? "distro.running" : (distro.status == "Stopped" ? "distro.stopped" : "distro.installing"), [AppI18n.version]);
-        font-size: 12px * LayoutConstants.font-scale;
-        font-family: Theme.default_font;
-        color: Theme.text_secondary;
-        horizontal-alignment: is-rtl ? right : left;
+    // Status line with optional Boot badge
+    HorizontalLayout {
+        spacing: 4px;
+        alignment: is-rtl ? end : start;
+        Text {
+            text: AppI18n.t(distro.status == "Running" ? "distro.running" : (distro.status == "Stopped" ? "distro.stopped" : "distro.installing"), [AppI18n.version]);
+            font-size: 12px * LayoutConstants.font-scale;
+            font-family: Theme.default_font;
+            color: Theme.text_secondary;
+            horizontal-alignment: is-rtl ? right : left;
+        }
+        if (distro.boot_run): Text {
+            text: "Boot";
+            font-size: 11px;
+            font-family: Theme.default_font;
+            color: Theme.accent;
+            vertical-alignment: center;
+        }
     }
 }
 

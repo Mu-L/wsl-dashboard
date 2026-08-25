@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | 繁體中�
 - [💻 系統要求](#-系統要求)
 - [📦 安裝指南](#-安裝指南)
 - [🛠️ 技術棧與性能](#️-技術棧與性能)
+- [📢 官方交流群](#-官方交流群)
 - [🤝 社區支持](#-社區支持)
 - [❤️ 支持本專案](#️-支持本專案)
 - [⭐️ 為愛發電](#️-為愛發電)
@@ -110,8 +111,10 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | 繁體中�
 - **現代原生 UI**：直觀的 GUI，支持深色/淺色模式，流暢的動畫，由 **Skia** 驅動的高性能渲染。
 - **系統托盤整合**：全方位的托盘支持（約 10MB 內存佔用），支持雙擊切換顯示/隱藏以及功能完整的右鍵菜單。
 - **智慧啟動**：支持開機自啟、最小化到托盤（使用 `/silent` 參數靜默啟動），以及退出時自動關閉發行版。
+- **任務計劃**：靈活的定時任務管理，支援按指定時間或週期自動執行 WSL 實例中的腳本和命令，實現自動化維運。
 - **全面的實例控制**：一鍵啟動、停止、終止和註銷。即時狀態監控，深入查看磁碟使用情況和文件位置。
 - **發行版管理**：設置為預設、物理遷移（將 VHDX 移動到其他磁碟）、以及匯出/克隆為 `.tar` 或 `.tar.gz` 封存檔。
+- **磁碟掛載**：直接掛載和管理 WSL 實例的 VHDX 虛擬磁碟，支援掛載、卸載、磁碟管理操作，方便在宿主机與 WSL 之間傳輸檔案。
 - **快速整合**：一鍵進入終端、VS Code 或文件資源管理器，支持自定義工作目錄和啟動腳本鉤子。
 - **發行版安裝**：支持透過 Microsoft Store、GitHub、本地檔案（RootFS/VHDX）或線上鏡像源安裝 Linux 發行版（自動測速選擇最快鏡像，內建 RootFS 下載助手）。
 - **全局安全**：使用互斥鎖確保併發遷移/備份操作的安全，並在移除時自動清理 Appx 包。
@@ -176,6 +179,18 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | 繁體中�
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### 磁碟掛載
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### 任務計劃
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 操作演示
@@ -266,6 +281,17 @@ winget install Owu.WSLDashboard
   - **便攜性**：優化後的發布版本生成單個精簡的可執行文件。
 
 
+
+## 📢 官方交流群
+
+歡迎加入 WSL UI 官方交流群，與開發者和其他用戶一起討論使用心得、回饋問題、取得最新動態。
+
+| 全球交流群 (Telegram) | 中文交流群 (微信) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| 掃碼加入 | 掃碼加入 |
+
+---
 
 ## 🤝 社區支持
 

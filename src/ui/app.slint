@@ -18,6 +18,8 @@ import {
     AppApi,
     AppI18n,
     UsbDeviceDetailInfo,
+    PhysicalDiskInfo,
+    MountedDiskInfo,
 } from "theme.slint";
 import { AppConstants } from "constants.slint";
 import { TitleBar } from "components/title_bar.slint";
@@ -30,13 +32,15 @@ import { UsbView } from "views/usb_view.slint";
 import { NetworkView } from "views/network/mod.slint";
 import { SchedulerView } from "views/scheduler_view.slint";
 import { SchedulerDialog } from "components/dialogs/scheduler_dialog.slint";
+import { MountDiskView } from "views/mount_disk_view.slint";
+import { MountDiskDialog } from "components/dialogs/mount_disk_dialog.slint";
 import { SettingsView } from "views/settings/mod.slint";
 import { AboutView } from "views/about_view.slint";
 import { DonateView } from "views/donate_view.slint";
 import { TaskStatusToast } from "components/task_status_toast.slint";
 
 
-export { Theme, Distro, InstallableDistro, AppInfo, RootFSHelpItem, UsbDevice, PortProxyRuleUI, AppI18n, AppApi }
+export { Theme, Distro, InstallableDistro, AppInfo, RootFSHelpItem, UsbDevice, PortProxyRuleUI, AppI18n, AppApi, PhysicalDiskInfo, MountedDiskInfo }
 
 export component AppWindow inherits Window {
     title: "WSL_DASHBOARD_WINDOW_UI";
@@ -129,6 +133,7 @@ export component AppWindow inherits Window {
     in-out property <bool> sidebar_donate: true;
     in-out property <bool> sidebar_about: true;
     in-out property <bool> sparse_vhd: false;
+    in-out property <bool> mount_auto_probe: false;
     in-out property <bool> system_color <=> Theme.system_color;
     in-out property <bool> colorful_icons <=> Theme.colorful_icons;
     in property <string> task_status_text: "";
@@ -145,6 +150,7 @@ export component AppWindow inherits Window {
     in property <[string]> donate_method_urls: [];
     in property <[string]> donate_method_exts: [];
     in property <[image]> donate_method_regions: [];
+    in property <string> donate_donation_record_url: "";
     in-out property <bool> show_donate_popup: false;
     in-out property <bool> donate_popup_loading: false;
     in-out property <image> donate_popup_image;
@@ -252,6 +258,26 @@ export component AppWindow inherits Window {
 
     in-out property <string> scheduler_busy_task_id: "";
     in-out property <bool> sidebar_scheduler: true;
+
+    // --- Mount Disk Properties ---
+    in property <[PhysicalDiskInfo]> mount_disk_physical_disks: [];
+    in property <[string]> mount_disk_physical_disk_texts: [];
+    in property <[MountedDiskInfo]> mount_disk_mounted_list: [];
+    in property <string> mount_disk_error: "";
+    in-out property <bool> show_mount_disk_dialog: false;
+    in-out property <int> mount_disk_dialog_tab: 0;
+    in-out property <string> mount_disk_dialog_vhd_path: "";
+    in-out property <bool> mount_disk_dialog_bare: false;
+    in-out property <string> mount_disk_dialog_name: "";
+    in-out property <string> mount_disk_dialog_partition: "";
+    in-out property <string> mount_disk_dialog_filesystem: "";
+    in-out property <string> mount_disk_dialog_options: "";
+    in-out property <int> mount_disk_dialog_selected_disk_idx: 0;
+    in property <string> mount_disk_help_url: "";
+    in-out property <bool> sidebar_mount: true;
+    in-out property <bool> show_mount_disk_delete_confirmation: false;
+    in-out property <string> mount_disk_to_delete: "";
+    in-out property <bool> show_mount_restart_confirm: false;
 
     // WSL Compat Dialog properties
     in-out property <bool> show_wsl_compat_dialog: false;
@@ -437,6 +463,19 @@ export component AppWindow inherits Window {
     callback scheduler_arguments_changed(string);
     callback scheduler_cron_changed(string);
 
+    // Mount Disk callbacks
+    callback refresh_mount_disk_list();
+    callback open_mount_disk_dialog();
+    callback close_mount_disk_dialog();
+    callback mount_disk_select_vhd();
+    callback mount_disk_confirm_mount();
+    callback mount_disk_open_help_url();
+    callback mount_disk_unmount_from_list(string);
+    callback mount_disk_delete_from_list(string);
+    callback mount_disk_mount_from_list(string);
+    callback confirm_mount_restart();
+    callback cancel_mount_restart();
+
     // Language Dialog callbacks
     callback language_selected(int);
     language_selected(idx) => {
@@ -578,6 +617,7 @@ export component AppWindow inherits Window {
                     usb_text: AppI18n.t("sidebar.usb", [AppI18n.version]);
                     network_text: AppI18n.t("sidebar.network", [AppI18n.version]);
                     scheduler_text: AppI18n.t("sidebar.scheduler", [AppI18n.version]);
+                    mount_text: AppI18n.t("sidebar.mount", [AppI18n.version]);
                     settings_text: AppI18n.t("sidebar.settings", [AppI18n.version]);
                     about_text: AppI18n.t("sidebar.about", [AppI18n.version]);
                     donate_text: AppI18n.t("sidebar.donate", [AppI18n.version]);
@@ -586,6 +626,7 @@ export component AppWindow inherits Window {
                     show_usb: root.sidebar_usb;
                     show_network: root.sidebar_network;
                     show_scheduler: root.sidebar_scheduler;
+                    show_mount: root.sidebar_mount;
                     show_donate: root.sidebar_donate;
                     show_about: root.sidebar_about;
                     tab_selected(idx) => {
@@ -859,11 +900,35 @@ export component AppWindow inherits Window {
                                 }
                             }
 
-                            DonateView {
+                            MountDiskView {
                                 visible: true;
                                 opacity: selected_tab == 5 ? 1 : 0;
-                                z: 5;
+                                z: 9;
                                 x: selected_tab == 5 ? 0px : 10000px;
+                                mounted_disks: root.mount_disk_mounted_list;
+                                open_mount_dialog => {
+                                    root.open_mount_disk_dialog();
+                                }
+                                refresh_list => {
+                                    root.refresh_mount_disk_list();
+                                }
+                                unmount_disk(path) => {
+                                    root.mount_disk_unmount_from_list(path);
+                                }
+                                delete_disk(path) => {
+                                    root.mount_disk_to_delete = path;
+                                    root.show_mount_disk_delete_confirmation = true;
+                                }
+                                mount_disk(path) => {
+                                    root.mount_disk_mount_from_list(path);
+                                }
+                            }
+
+                            DonateView {
+                                visible: true;
+                                opacity: selected_tab == 6 ? 1 : 0;
+                                z: 5;
+                                x: selected_tab == 6 ? 0px : 10000px;
                                 title_text: AppI18n.t("donate.title", [AppI18n.version]);
                                 license_intro_text: AppI18n.t("donate.license_intro", [AppI18n.version]);
                                 maintain_note_text: AppI18n.t("donate.maintain_note", [AppI18n.version]);
@@ -879,6 +944,7 @@ export component AppWindow inherits Window {
                                 method_urls: root.donate_method_urls;
                                 method_exts: root.donate_method_exts;
                                 method_regions: root.donate_method_regions;
+                                donation_record_url: root.donate_donation_record_url;
                                 strings: root.donate_strings;
                                 open_url(url) => {
                                     root.open_url(url);
@@ -893,9 +959,9 @@ export component AppWindow inherits Window {
 
                             SettingsView {
                                 visible: true;
-                                opacity: selected_tab == 6 ? 1 : 0;
+                                opacity: selected_tab == 7 ? 1 : 0;
                                 z: 6;
-                                x: selected_tab == 6 ? 0px : 10000px;
+                                x: selected_tab == 7 ? 0px : 10000px;
                                 strings: root.settings_strings;
                                 show_language_dialog <=> root.show_language_dialog;
                                 language_selected(lang_code) => {
@@ -923,9 +989,11 @@ export component AppWindow inherits Window {
                                 sidebar_usb <=> root.sidebar_usb;
                                 sidebar_network <=> root.sidebar_network;
                                 sidebar_scheduler <=> root.sidebar_scheduler;
+                                sidebar_mount <=> root.sidebar_mount;
                                 sidebar_donate <=> root.sidebar_donate;
                                 sidebar_about <=> root.sidebar_about;
                                 sparse_vhd <=> root.sparse_vhd;
+                                mount_auto_probe <=> root.mount_auto_probe;
                                 save_general_settings => {
                                     root.save_general_settings();
                                 }
@@ -951,9 +1019,9 @@ export component AppWindow inherits Window {
 
                             AboutView {
                                 visible: true;
-                                opacity: selected_tab == 7 ? 1 : 0;
+                                opacity: selected_tab == 8 ? 1 : 0;
                                 z: 7;
-                                x: selected_tab == 7 ? 0px : 10000px;
+                                x: selected_tab == 8 ? 0px : 10000px;
                                 strings: root.about_strings;
                                 group_pic: root.about_group_pic;
                                 group_pic_ready: root.about_group_pic_ready;
@@ -974,26 +1042,14 @@ export component AppWindow inherits Window {
                         }
                     }
 
-                    TaskStatusToast {
-                        z: 10;
-                        opacity: root.task_status_visible ? 1 : 0;
-                        visible: root.task_status_visible;
-                        text: root.task_status_text;
-                        is_shown: root.task_status_visible;
-                        max_container_width: parent.width - 40px;
-                        x: (parent.width - self.width) / 2;
-                        y: parent.height - self.height - 14px;
-                        close => {
-                            root.close_task_status();
-                        }
                     }
-                }
             }
         }
     }
 
         // --- Layers/Modals ---
         ModalManager {
+        z: 200;
         is_installing: root.is_installing;
         show_delete: root.show_delete_confirmation;
         delete_target_name: root.distro_to_delete;
@@ -1003,6 +1059,23 @@ export component AppWindow inherits Window {
         }
         cancel_delete => {
             root.show_delete_confirmation = false;
+        }
+        show_mount_disk_delete: root.show_mount_disk_delete_confirmation;
+        mount_disk_delete_target: root.mount_disk_to_delete;
+        confirm_mount_disk_delete => {
+            root.mount_disk_delete_from_list(root.mount_disk_to_delete);
+            root.show_mount_disk_delete_confirmation = false;
+        }
+        cancel_mount_disk_delete => {
+            root.show_mount_disk_delete_confirmation = false;
+        }
+        show_mount_restart_confirm: root.show_mount_restart_confirm;
+        confirm_mount_restart => {
+            root.show_mount_restart_confirm = false;
+            root.confirm_mount_restart();
+        }
+        cancel_mount_restart => {
+            root.show_mount_restart_confirm = false;
         }
         show_stop_wsl_confirm: root.show_stop_wsl_confirm;
         confirm_stop_wsl => {
@@ -1437,6 +1510,51 @@ export component AppWindow inherits Window {
         }
         command_help_clicked => {
             root.open_scheduler_help(root.scheduler_dialog_command_help_url);
+        }
+    }
+
+    // Mount Disk Dialog
+    if root.show_mount_disk_dialog : MountDiskDialog {
+        z: 100;
+        open: root.show_mount_disk_dialog;
+        active_tab <=> root.mount_disk_dialog_tab;
+        physical_disks: root.mount_disk_physical_disks;
+        physical_disk_texts: root.mount_disk_physical_disk_texts;
+        selected_disk_index <=> root.mount_disk_dialog_selected_disk_idx;
+        vhd_path <=> root.mount_disk_dialog_vhd_path;
+        bare_mount <=> root.mount_disk_dialog_bare;
+        custom_name <=> root.mount_disk_dialog_name;
+        partition <=> root.mount_disk_dialog_partition;
+        filesystem <=> root.mount_disk_dialog_filesystem;
+        mount_options <=> root.mount_disk_dialog_options;
+        mount_help_url: root.mount_disk_help_url;
+
+        close => {
+            root.close_mount_disk_dialog();
+        }
+        browse_vhd => {
+            root.mount_disk_select_vhd();
+        }
+        confirm_mount => {
+            root.mount_disk_confirm_mount();
+        }
+        open_mount_help_url => {
+            root.mount_disk_open_help_url();
+        }
+    }
+
+    // Toast notification (on top of all dialogs)
+    TaskStatusToast {
+        z: 100;
+        opacity: root.task_status_visible ? 1 : 0;
+        visible: root.task_status_visible;
+        text: root.task_status_text;
+        is_shown: root.task_status_visible;
+        max_container_width: root.width - 40px;
+        x: (root.width - self.width) / 2;
+        y: root.height - self.height - 14px;
+        close => {
+            root.close_task_status();
         }
     }
 }

@@ -40,6 +40,7 @@ I18N :  English | [简体中文](./manual/README_zh_CN.md) | [繁體中文](./ma
 - [💻 System Requirements](#-system-requirements)
 - [📦 Installation](#-installation)
 - [🛠️ Tech Stack & Performance](#️-tech-stack--performance)
+- [📢 Official Community Groups](#-official-community-groups)
 - [🤝 Community Support](#-community-support)
 - [❤️ Support this project](#️-support-this-project)
 - [⭐️ Labor of love](#️-labor-of-love)
@@ -110,8 +111,10 @@ English, Simplified Chinese, Traditional Chinese, Hindi, Spanish, French, Arabic
 - **Modern Native UI**: Intuitive GUI with Dark/Light mode support, smooth animations, and high-performance rendering powered by **Skia**.
 - **System Tray Integration**: Full support for system tray minimizing (~10MB RAM usage), double-click to toggle, and a functional right-click menu.
 - **Intelligent Startup**: Configure the dashboard to start with Windows, minimize to tray (silent mode with `/silent`), and auto-shutdown distributions on exit.
+- **Task Scheduler**: Flexible task scheduler management, supporting automatic execution of scripts and commands in WSL instances at specified times or intervals for automated operations.
 - **Comprehensive Instance Control**: One-click Start, Stop, Terminate, and Unregister. Real-time status monitoring and detailed insights into disk usage and file locations.
 - **Distro Management**: Set as default, migration (Move VHDX to other drives), and export/clone to `.tar` or `.tar.gz` archives.
+- **Disk Mount**: Directly mount and manage WSL instance VHDX virtual disks, supporting mount, unmount, and disk management operations, making it easy to transfer files between the host and WSL.
 - **Quick Integration**: Instant launch into Terminal, VS Code, or File Explorer with customizable working directories and startup script hooks.
 - **Distro Installation**: Install Linux distributions via Microsoft Store, GitHub, local files (RootFS/VHDX), or Online Mirrors (with auto speed-test to pick the fastest mirror and built-in RootFS download helper).
 - **Global Safety**: Mutex locks for safe concurrent migration/backup operations and automatic Appx cleanup on removal.
@@ -176,6 +179,18 @@ Log files are written to the configured log directory and can be attached when r
 <p align="center">
   <img src="assets/screenshot/about.png" width="48%" />
   <img src="assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Disk Mount
+<p align="center">
+  <img src="assets/screenshot/mount.png" width="48%" />
+  <img src="assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Task Scheduler
+<p align="center">
+  <img src="assets/screenshot/task.png" width="48%" />
+  <img src="assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Operation Demo
@@ -264,6 +279,18 @@ Ensure you have the Rust toolchain (Rust 1.92+ or newer) installed.
   - **Responsiveness**: Near-instant startup and real-time WSL status monitoring.
   - **Efficiency**: Ultra-low resource usage (see [Key Features](#-key-features--usage) for details).
   - **Portability**: Optimized release build produces a single compact executable.
+
+
+## 📢 Official Community Groups
+
+Welcome to the official WSL UI community groups! Join our channels to discuss usage tips, report issues, get the latest updates, and connect with the developers and other users.
+
+| Global Group (Telegram) | Chinese Group (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Scan to join | Scan to join |
+
+---
 
 
 ## 🤝 Community Support

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
 // Configuration file version constant
-pub const SETTINGS_VERSION: u32 = 8;
+pub const SETTINGS_VERSION: u32 = 9;
 
 // Application configuration
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -68,6 +68,8 @@ pub struct UserSettings {
     pub hide_pin: bool,
     #[serde(rename = "show-drag", default = "default_true")]
     pub show_drag: bool,
+    #[serde(rename = "mount-auto-probe", default)]
+    pub mount_auto_probe: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -156,6 +158,7 @@ impl Config {
                 mail: true,
                 hide_pin: false,
                 show_drag: true,
+                mount_auto_probe: false,
             },
 
             tray: TraySettings::default(),
@@ -177,6 +180,10 @@ pub struct SidebarConfig {
     #[serde(default = "default_true")]
     pub network: bool,
     #[serde(default = "default_true")]
+    pub scheduler: bool,
+    #[serde(default = "default_true", alias = "mount_disk")]
+    pub mount: bool,
+    #[serde(default = "default_true")]
     pub about: bool,
     #[serde(default = "default_true")]
     pub donate: bool,
@@ -193,6 +200,8 @@ impl Default for SidebarConfig {
             add: true,
             usb: true,
             network: true,
+            scheduler: true,
+            mount: true,
             about: true,
             donate: true,
         }

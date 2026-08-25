@@ -56,6 +56,12 @@ impl ScheduledTask for WslCompatTask {
     }
 }
 
+// Result of version compatibility check
+struct CompatRange {
+    in_range: bool,
+    range_text: String,
+}
+
 impl WslCompatTask {
     async fn do_check(&self, app_handle: &slint::Weak<AppWindow>) -> Result<(), String> {
         // Poll bootstrap_data until ready (unix_time > 0)
@@ -87,12 +93,6 @@ impl WslCompatTask {
             return Ok(());
         }
 
-        // Check if since_version is set
-        if ws.since_version.is_empty() {
-            info!("wsl_compat: since_version is empty, skipping");
-            return Ok(());
-        }
-
         // Get WSL version
         let executor = {
             let state = self.app_state.lock().await;
@@ -109,13 +109,36 @@ impl WslCompatTask {
         let since = &ws.since_version;
         let until = &ws.until_version;
 
-        info!("wsl_compat: current={}, range=[{}, {}]", current, since, until);
+        info!("wsl_compat: current={}, since='{}', until='{}'", current, since, until);
 
-        // Compare: current >= since && current <= until
-        let in_range = version_gte(current, since) && version_lte(current, until);
+        let compat = match (since.is_empty(), until.is_empty()) {
+            (false, false) => {
+                // Closed interval [since, until]
+                let in_range = version_gte(current, since) && version_lte(current, until);
+                let range_text = format!("[{}, {}]", since, until);
+                CompatRange { in_range, range_text }
+            }
+            (false, true) => {
+                // Greater-or-equal >= since
+                let in_range = version_gte(current, since);
+                let range_text = format!(">= {}", since);
+                CompatRange { in_range, range_text }
+            }
+            (true, false) => {
+                // Less-or-equal <= until
+                let in_range = version_lte(current, until);
+                let range_text = format!("<= {}", until);
+                CompatRange { in_range, range_text }
+            }
+            (true, true) => {
+                // Both empty, skip
+                info!("wsl_compat: both since_version and until_version are empty, skipping");
+                return Ok(());
+            }
+        };
 
-        if !in_range {
-            warn!("wsl_compat: version {} not in range [{}, {}]", current, since, until);
+        if !compat.in_range {
+            warn!("wsl_compat: version {} not in range {}", current, compat.range_text);
 
             // Highest priority, not subject to DND suppression
             // Only record DND timestamp to suppress subsequent low-priority dialogs
@@ -125,12 +148,16 @@ impl WslCompatTask {
             }
 
             // Build dialog text
-            let msg1 = crate::i18n::tr("dialog.wsl_compat_msg1", &[current.to_string(), since.to_string(), until.to_string()]);
+            let msg1 = crate::i18n::tr("dialog.wsl_compat_msg1", &[current.to_string(), compat.range_text]);
             let msg2 = crate::i18n::t("dialog.wsl_compat_msg2");
             let msg3 = crate::i18n::tr("dialog.wsl_compat_msg3", &[until.to_string()]);
             let hint_text = crate::i18n::t("dialog.wsl_compat_issues_hint");
             let link_text = crate::i18n::t("dialog.wsl_compat_issues_link");
-            let issues_url = format!("{}{}", crate::app::PROJECT_REPOSITORY, crate::app::GITHUB_ISSUES);
+            let issues_url = if ws.url.is_empty() {
+                format!("{}{}", crate::app::PROJECT_REPOSITORY, crate::app::GITHUB_ISSUES)
+            } else {
+                ws.url.clone()
+            };
             let show_confirm = ws.confirm != 0;
 
             info!("wsl_compat: showing compat dialog (show_confirm={})", show_confirm);

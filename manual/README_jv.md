@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - [💻 Syarat Sistem](#-syarat-sistem)
 - [📦 Panduan Instalasi](#-panduan-instalasi)
 - [🛠️ Tumpukan Teknologi lan Kinerja](#️-tumpukan-teknologi-lan-kinerja)
+- [📢 Grup Komunitas Resmi](#-grup-komunitas-resmi)
 - [🤝 Dhukungan Komunitas](#-dhukungan-komunitas)
 - [❤️ Dhukung Proyek Iki](#️-dhukung-proyek-iki)
 - [⭐️ Kanggo Katresnan](#️-kanggo-katresnan)
@@ -110,8 +111,10 @@ Inggris, Tionghoa Ringkes, Tionghoa Tradisional, Hindi, Spanyol, Prancis, Arab, 
 - **UI Native Modern**: GUI intuitif kanthi mode peteng/terang, animasi lancar, lan rendering berkinerja tinggi sing diprodhuksi dening **Skia**.
 - **Integrasi System Tray**: Dhukungan tray lengkap (~10MB panggunaan memori), kanthi toggle tampilan/ndhelikake klik pindho lan menu klik-tengen sing fungsional.
 - **Startup Pinter**: Dhukungan miwiti otomatis nalika boot, minimize menyang tray (nganggo parameter `/silent` kanggo miwiti tanpa swara), lan nutup distro kanthi otomatis nalika metu.
+- **Penjadwalan Tugas**: Manajemen penjadwalan tugas sing fleksibel, ndhukung eksekusi otomatis skrip lan perintah ing instans WSL ing wektu utawa interval tartamtu kanggo operasi otomatis.
 - **Kontrol Instans Lengkap**: Miwiti, mandeg, mateni, lan copot registrasi siji klik. Pemantauan status wektu nyata, ndeleng rinci panggunaan disk lan lokasi file.
 - **Manajemen Distro**: Setel minangka default, migrasi fisik (pindhah VHDX menyang disk liyane), lan ekspor/kanggo arsip `.tar` utawa `.tar.gz`.
+- **Pemasangan Disk**: Pasang lan atur disk virtual VHDX instans WSL kanthi langsung, ndhukung operasi mount, unmount, lan manajemen disk, nggampangake transfer file antarane host lan WSL.
 - **Integrasi Cepet**: Siji klik mlebu terminal, VS Code, utawa File Explorer, kanthi dhukungan direktori kerja khusus lan hook skrip startup.
 - **Instalasi Distro**: Instal distribusi Linux liwat Microsoft Store, GitHub, file lokal (RootFS/VHDX), utawa mirror online (karo tes kecepatan otomatis kanggo milih mirror paling cepet lan asisten download RootFS ing-build).
 - **Keamanan Global**: Nggunakake mutex kanggo njamin keamanan operasi migrasi/backup bebarengan, lan resik otomatis paket Appx nalika mbusak.
@@ -176,6 +179,18 @@ File log bakal ditulis menyang direktori log sing wis dikonfigurasi, lan bisa di
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Pemasangan Disk
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Penjadwalan Tugas
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Demo Operasi
@@ -265,6 +280,18 @@ Priksa manawa toolchain Rust wis dipasang (Rust 1.92+ utawa versi luwih anyar).
   - **Efisiensi Sumber Daya**: Panggunaan sumber daya sing amat sithik (deleng rinci ing [Fitur Inti](#-fitur-inti-lan-panggunaan)).
   - **Portabilitas**: Versi rilis sing dioptimalake ngasilake file eksekusi tunggal sing ringkas.
 
+
+
+## 📢 Grup Komunitas Resmi
+
+Welan ing grup komunitas resmi WSL UI! Dhukung saluran kita kanggo ndiskusikake tips, nglaporake masalah, nampa pembaruan, lan ngubungake karo pambangun lan pangguna liyane.
+
+| Grup Global (Telegram) | Grup Tionghoa (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Pindai kanggo gabung Telegram | Pindai kanggo gabung WeChat |
+
+---
 
 
 ## 🤝 Dhukungan Komunitas

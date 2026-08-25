@@ -48,6 +48,11 @@ pub async fn bootstrap(args: &[String]) -> AppContext {
     
     info!("[STARTUP] Mode: {}", startup_mode);
 
+    // 4. Log system version information asynchronously (non-blocking)
+    tokio::spawn(async {
+        crate::app::startup_info::log_startup_system_info().await;
+    });
+
     AppContext {
         config_manager,
         settings,

@@ -27,7 +27,7 @@ import {
 import { ProxyHelpDialog } from "./dialogs/proxy_help_dialog.slint";
 import { CheckProxyDialog } from "./dialogs/check_proxy_dialog.slint";
 import { UsbSettingsDialog } from "./dialogs/usb_settings_dialog.slint";
-import { AppInfo, Information, RootFSHelpItem, MessageData, AppI18n, Theme, UsbDevice, UsbDeviceDetailInfo } from "../theme.slint";
+import { AppInfo, Information, RootFSHelpItem, MessageData, AppI18n, Theme, LayoutConstants, UsbDevice, UsbDeviceDetailInfo } from "../theme.slint";
 
 export component ModalManager inherits Rectangle {
     // Controls
@@ -105,6 +105,13 @@ export component ModalManager inherits Rectangle {
     in property <bool> show_usb_device_info: false;
     in property <UsbDeviceDetailInfo> usb_device_info_data;
     callback close_usb_device_info();
+
+    // Mount Disk Delete
+    in property <bool> show_mount_disk_delete: false;
+    in property <string> mount_disk_delete_target: "";
+
+    // Mount Disk Restart Confirm
+    in property <bool> show_mount_restart_confirm: false;
 
     // Data
     in property <string> delete_target_name: "";
@@ -195,6 +202,10 @@ export component ModalManager inherits Rectangle {
     // Callbacks
     callback confirm_delete();
     callback cancel_delete();
+    callback confirm_mount_disk_delete();
+    callback cancel_mount_disk_delete();
+    callback confirm_mount_restart();
+    callback cancel_mount_restart();
     callback confirm_export(string);
     callback cancel_export();
     callback browse_export();
@@ -253,6 +264,106 @@ export component ModalManager inherits Rectangle {
         }
         cancel => {
             root.cancel_delete();
+        }
+    }
+    if (show_mount_disk_delete): ConfirmationDialog {
+        width: 100%;
+        height: 100%;
+        dialog_height: 200px;
+        title_text: AppI18n.t("mount_disk.delete_title", [mount_disk_delete_target, AppI18n.version]);
+        message: AppI18n.t("mount_disk.delete_confirm_msg", [mount_disk_delete_target, AppI18n.version]);
+        confirm => {
+            root.confirm_mount_disk_delete();
+        }
+        cancel => {
+            root.cancel_mount_disk_delete();
+        }
+    }
+    if (show_mount_restart_confirm): Rectangle {
+        width: 100%;
+        height: 100%;
+        background: #00000080;
+        TouchArea {
+            clicked => { root.cancel_mount_restart(); }
+        }
+        Rectangle {
+            width: 400px;
+            height: 210px;
+            background: Theme.card_bg;
+            border-radius: 8px;
+            border-width: 1px;
+            border-color: Theme.border_color;
+            TouchArea { }
+            VerticalLayout {
+                padding: 24px;
+                spacing: 8px;
+                Rectangle {
+                    height: 24px;
+                    Text {
+                        x: 0px;
+                        width: parent.width - 32px;
+                        text: AppI18n.t("dialog.info", [AppI18n.version]);
+                        font-size: 18px * LayoutConstants.font-scale;
+                        font-family: Theme.default_font;
+                        font-weight: 500;
+                        color: Theme.text_primary;
+                        horizontal-alignment: left;
+                        vertical-alignment: center;
+                    }
+                    TouchArea {
+                        x: parent.width - 24px;
+                        width: 24px;
+                        height: 24px;
+                        clicked => { root.cancel_mount_restart(); }
+                        Rectangle {
+                            background: parent.has-hover ? Theme.hover_bg : transparent;
+                            border-radius: 4px;
+                            Text {
+                                text: "\u{E8BB}";
+                                font-family: Theme.icon_font;
+                                font-size: 14px;
+                                color: Theme.text_primary;
+                                horizontal-alignment: center;
+                                vertical-alignment: center;
+                            }
+                        }
+                    }
+                }
+                Rectangle {
+                    height: 1px;
+                    background: Theme.border_color;
+                }
+                Text {
+                    text: AppI18n.t("mount_disk.restart_confirm_msg", [AppI18n.version]);
+                    font-size: 14px * LayoutConstants.font-scale;
+                    font-family: Theme.default_font;
+                    color: Theme.text_primary;
+                    wrap: word-wrap;
+                    vertical-stretch: 1;
+                    vertical-alignment: center;
+                    horizontal-alignment: left;
+                }
+                HorizontalLayout {
+                    alignment: end;
+                    Rectangle {
+                        width: 80px;
+                        height: 32px;
+                        border-radius: 4px;
+                        background: touch_restart.has-hover ? #C42B1C : #E81123;
+                        Text {
+                            text: AppI18n.t("dialog.restart", [AppI18n.version]);
+                            font-size: 13px * LayoutConstants.font-scale;
+                            font-family: Theme.default_font;
+                            color: white;
+                            horizontal-alignment: center;
+                            vertical-alignment: center;
+                        }
+                        touch_restart := TouchArea {
+                            clicked => { root.confirm_mount_restart(); }
+                        }
+                    }
+                }
+            }
         }
     }
     if (show_stop_wsl_confirm): ConfirmationDialog {

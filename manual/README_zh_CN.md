@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | 简体中文 | [繁體中文](./README_zh_TW.m
 - [💻 系统要求](#-系统要求)
 - [📦 安装指南](#-安装指南)
 - [🛠️ 技术栈与性能](#️-技术栈与性能)
+- [📢 官方交流群](#-官方交流群)
 - [🤝 社区支持](#-社区支持)
 - [❤️ 支持本项目](#️-支持本项目)
 - [⭐️ 为爱发电](#️-为爱发电)
@@ -110,8 +111,10 @@ I18N :  [English](../README.md) | 简体中文 | [繁體中文](./README_zh_TW.m
 - **现代原生 UI**：直观的 GUI，支持深色/浅色模式，流畅的动画，由 **Skia** 驱动的高性能渲染。
 - **系统托盘集成**：全方位的托盘支持（约 10MB 内存占用），支持双击切换显示/隐藏以及功能完整的右键菜单。
 - **智能启动**：支持开机自启、最小化到托盘（使用 `/silent` 参数静默启动），以及退出时自动关闭发行版。
+- **任务计划**：灵活的定时任务管理，支持按指定时间或周期自动执行 WSL 实例中的脚本和命令，实现自动化运维。
 - **全面的实例控制**：一键启动、停止、终止和注销。实时状态监控，深入查看磁盘使用情况和文件位置。
 - **发行版管理**：设置为默认、物理迁移（将 VHDX 移动到其他磁盘）、以及导出/克隆为 `.tar` 或 `.tar.gz` 存档。
+- **磁盘挂载**：直接挂载和管理 WSL 实例的 VHDX 虚拟磁盘，支持挂载、卸载、磁盘管理操作，方便在宿主机与 WSL 之间传输文件。
 - **快速集成**：一键进入终端、VS Code 或文件资源管理器，支持自定义工作目录和启动脚本钩子。
 - **发行版安装**：支持通过 Microsoft Store、GitHub、本地文件（RootFS/VHDX）或在线镜像源安装 Linux 发行版（自动测速选择最快镜像，内置 RootFS 下载助手）。
 - **全局安全**：使用互斥锁确保并发迁移/备份操作的安全，并在移除时自动清理 Appx 包。
@@ -176,6 +179,18 @@ I18N :  [English](../README.md) | 简体中文 | [繁體中文](./README_zh_TW.m
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### 磁盘挂载
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### 任务计划
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 操作演示
@@ -264,6 +279,19 @@ winget install Owu.WSLDashboard
   - **响应速度**：近乎瞬时的启动速度，并实时监控 WSL 状态。
   - **资源效率**：极低的资源占用（详见 [核心功能](#-核心功能与使用)）。
   - **便携性**：优化后的发布版本生成单个精简的可执行文件。
+
+
+
+## 📢 官方交流群
+
+欢迎加入 WSL UI 官方交流群，与开发者和其他用户一起讨论使用心得、反馈问题、获取最新动态。
+
+| 全球交流群 (Telegram) | 中文交流群 (微信) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| 扫码加入 | 扫码加入 |
+
+---
 
 
 

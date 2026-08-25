@@ -111,8 +111,8 @@ PrivilegesRequiredOverrideTitle={#AppName} v{#AppVersion}
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"
-Name: "startmenuicon"; Description: "{cm:StartMenuIcon}"; Flags: checkedonce
-Name: "createscheduler"; Description: "{cm:CreateSchedulerTask}"; Check: IsAdminInstallMode; Flags: unchecked
+Name: "startmenuicon"; Description: "{cm:StartMenuIcon}"
+Name: "createscheduler"; Description: "{cm:CreateSchedulerTask}"; Check: IsAdminInstallMode
 
 [Files]
 Source: "..\..\target\release\{#AppExeName}"; DestDir: "{app}"; Flags: ignoreversion

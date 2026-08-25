@@ -63,8 +63,8 @@ pub fn run_command_with_elevation(program_name: &str, args: Vec<String>) -> Resu
     use windows::Win32::UI::Shell::{ShellExecuteExW, SHELLEXECUTEINFOW, SEE_MASK_NOCLOSEPROCESS, SEE_MASK_NOASYNC};
     use windows::Win32::UI::WindowsAndMessaging::SW_HIDE;
     use windows::Win32::Foundation::CloseHandle;
-    use windows::Win32::System::Threading::{WaitForSingleObject, INFINITE};
-    use tracing::debug;
+    use windows::Win32::System::Threading::{WaitForSingleObject, GetExitCodeProcess, INFINITE};
+    use tracing::{debug, error};
 
     let args_str = args.join(" ");
     let program = HSTRING::from(program_name);
@@ -92,12 +92,29 @@ pub fn run_command_with_elevation(program_name: &str, args: Vec<String>) -> Resu
                 // Wait for the elevated process to finish
                 if !sei.hProcess.is_invalid() {
                     WaitForSingleObject(sei.hProcess, INFINITE);
+
+                    let mut exit_code: u32 = 0;
+                    if GetExitCodeProcess(sei.hProcess, &mut exit_code).is_ok() {
+                        if exit_code != 0 {
+                            let _ = CloseHandle(sei.hProcess);
+                            let msg = if exit_code == 4294967295 {
+                                format!("Command exited with code {} (0x{:X}) - WSL not ready or disk in use", exit_code, exit_code)
+                            } else {
+                                format!("Command exited with code {} (0x{:X})", exit_code, exit_code)
+                            };
+                            error!("Elevated command failed: {}", msg);
+                            return Err(msg);
+                        }
+                    }
+
                     let _ = CloseHandle(sei.hProcess);
                 }
                 Ok(())
             }
             Err(e) => {
-                Err(format!("UAC elevation failed or was denied: {}", e))
+                let msg = format!("UAC elevation failed or was denied: {}", e);
+                error!("{}", msg);
+                Err(msg)
             }
         }
     }
@@ -107,16 +124,44 @@ pub fn run_command_with_elevation(program_name: &str, args: Vec<String>) -> Resu
 pub fn run_invisible_elevated_commands(commands: Vec<String>) -> Result<(), String> {
     use tracing::info;
     use tracing::debug;
+    use tracing::error;
     
     if commands.is_empty() { return Ok(()); }
     
     // Join commands with ' & '
     let combined = commands.join(" & ");
     
-    info!("Requesting invisible elevated execution for {} commands via cmd.exe", commands.len());
-    debug!("Full elevated command: cmd /c \"{}\"", combined);
+    // Create a unique temp file to capture stdout/stderr for diagnostic purposes
+    let temp_dir = std::env::temp_dir();
+    let timestamp = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap_or_default()
+        .as_nanos();
+    let temp_file = temp_dir.join(format!("wsldashboard_elevated_{}.log", timestamp));
+    let temp_path = temp_file.to_string_lossy().to_string();
     
-    run_command_with_elevation("cmd.exe", vec!["/c".to_string(), format!("\"{}\"", combined)])
+    // Redirect stdout and stderr to the temp file for diagnostic capture.
+    // NOTE: do NOT wrap the whole command in extra quotes here. The redirect target
+    // is already quoted, and an additional outer `" "` pair would nest with it and
+    // confuse cmd.exe's parser (e.g. `\\.\PHYSICALDRIVE1` device paths).
+    let combined_with_redirect = format!("({}) > \"{}\" 2>&1", combined, temp_path);
+    
+    info!("Requesting invisible elevated execution for {} commands via cmd.exe", commands.len());
+    debug!("Full elevated command: cmd /c {}", combined_with_redirect);
+    
+    let result = run_command_with_elevation("cmd.exe", vec!["/c".to_string(), combined_with_redirect]);
+    
+    // Read the captured output file if it exists
+    let output_content = std::fs::read_to_string(&temp_file).unwrap_or_default();
+    let _ = std::fs::remove_file(&temp_file);
+    
+    if result.is_err() {
+        if !output_content.trim().is_empty() {
+            error!("Elevated command stderr/stdout output:\n{}", output_content.trim());
+        }
+    }
+    
+    result
 }
 
 pub fn run_invisible_elevated_command(command: &str) -> Result<(), String> {

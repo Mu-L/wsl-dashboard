@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - [💻 Järjestelmävaatimukset](#-järjestelmävaatimukset)
 - [📦 Asennusopas](#-asennusopas)
 - [🛠️ Teknologiapina ja suorituskyky](#️-teknologiapina-ja-suorituskyky)
+- [📢 Viralliset yhteisöryhmät](#-viralliset-yhteisöryhmät)
 - [🤝 Yhteisön tuki](#-yhteisön-tuki)
 - [❤️ Tue tätä projektia](#️-tee-tätä-projektia)
 - [⭐️ Sydämen asia](#️-sydämen-asia)
@@ -110,8 +111,10 @@ Englanti, Kiina (Yksinkertaistettu), Kiina (Perinteinen), Hindi, Espanja, Ranska
 - **Moderni natiivi käyttöliittymä**: Intuitiivinen GUI, jossa on tumma/vaalea tila -tuki, sulavat animaatiot ja korkean suorituskyvyn rendering, jota tukee **Skia**.
 - **Järjestelmäilmoitusalueen integraatio (Tray)**: Täysi tuki ilmoitusalueelle pienentämiselle (~10 MB RAM-muistin käyttö), kaksoisnapsautus tilan vaihtamiseksi ja toimiva oikean painikkeen valikko.
 - **Älykäs käynnistys**: Määritä hallintapaneeli käynnistymään Windowsin mukana, pienentymään ilmoitusalueelle (hiljainen tila `/silent`-parametrilla) ja sammuttamaan distributiot automaattisesti poistuttaessa.
+- **Tehtävien ajoitus**: Joustava tehtävien ajoituksen hallinta, joka tukee skriptien ja komentojen automaattista suorittamista WSL-instansseissa määritettyinä aikoina tai aikaväleinä automaattisia toimintoja varten.
 - **Kattava instanssien hallinta**: Käynnistä, pysäytä, lopeta ja poista rekisteröinti yhdellä napsautuksella. Reaaliaikainen tilan seuranta ja yksityiskohtaiset tiedot levynkäytöstä ja tiedostojen sijainneista.
 - **Distributioiden hallinta**: Aseta oletukseksi, siirrä (VHDX siirto muille asemille) ja vie/kloonaa `.tar` tai `.tar.gz` -arkistoihin.
+- **Levyn asennus**: Liitä ja hallitse WSL-instanssien VHDX-virtuaalilevyjä suoraan, tukee levyjen liittämistä, irrottamista ja levyjen hallintatoimintoja, mikä helpottaa tiedostojen siirtämistä isäntäjärjestelmän ja WSL:n välillä.
 - **Nopea integraatio**: Välitön käynnistys terminaaliin, VS Codeen tai tiedostonhallintaan muokattavilla työhakemistoilla ja käynnistysskriptien tuella.
 - **Jakelun asennus**: Asenna Linux-jakeluita Microsoft Storen, GitHubin, paikallisten tiedostojen (RootFS/VHDX) tai online-peilien kautta (automaattisella nopeustestillä nopeimman peilin valintaan ja sisäänrakennetulla RootFS-latausapulaisella).
 - **Globaali turvallisuus**: Mutex-lukot turvallisia rinnakkaisia siirto-/varmuuskopiointioperaatioita varten ja automaattinen Appx-puhdistus poiston yhteydessä.
@@ -176,6 +179,18 @@ Lokitiedostot kirjoitetaan määritettyyn lokihakemistoon ja ne voidaan liittä�
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Levyn asennus
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Tehtävien ajoitus
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Demonstraatio
@@ -266,6 +281,17 @@ Varmista, että sinulla on Rust-työkalukehys (Rust 1.92+ tai uudempi) asennettu
   - **Siirrettävyys**: Optimoitu julkaisuversio tuottaa yhden tiiviin suoritustiedoston.
 
 
+
+## 📢 Viralliset yhteisöryhmät
+
+Tervetuloa WSL UI:n virallisiin yhteisöryhmiin! Liity kanaviimme keskustellaksesi käyttövinkeistä, ilmoittaaksesi ongelmista, saadaksesi uusimmat päivitykset ja ollaksesi yhteydessä kehittäjiin ja muihinkin käyttäjiin.
+
+| Maailmanlaajuinen ryhmä (Telegram) | Kiinalainen ryhmä (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Skannaa liittymistäksesi | Skannaa liittymistäksesi |
+
+---
 
 ## 🤝 Yhteisön tuki
 

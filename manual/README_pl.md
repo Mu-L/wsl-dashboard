@@ -40,6 +40,7 @@ I18N : [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中�
 - [💻 Wymagania systemowe](#-wymagania-systemowe)
 - [📦 Instalacja](#-instalacja)
 - [🛠️ Stos technologiczny i wydajność](#️-stos-technologiczny-i-wydajność)
+- [📢 Oficjalne Grupy Społeczności](#-oficjalne-grupy-społeczności)
 - [🤝 Wsparcie społeczności](#-wsparcie-społeczności)
 - [❤️ Wsparcie projektu](#️-wsparcie-projektu)
 - [⭐️ Gwiazdka wsparcia](#️-gwiazdka-wsparcia)
@@ -110,8 +111,10 @@ Angielski, Chiński uproszczony, Chiński tradycyjny, Hindi, Hiszpański, Francu
 - **Nowoczesny natywny interfejs**: Intuicyjne GUI z obsługą trybu ciemnego/jasnego, płynne animacje i wydajne renderowanie napędzane przez **Skia**.
 - **Integracja z tacą systemową**: Pełne wsparcie tacy systemowej (zużycie pamięci ~10MB), podwójne kliknięcie do pokazania/ukrycia oraz w pełni funkcjonalne menu kontekstowe.
 - **Inteligentne uruchamianie**: Obsługa autostartu, minimalizacji do tacy (cichy start z parametrem `/silent`) oraz automatycznego wyłączania dystrybucji przy zamknięciu.
+- **Harmonogram zadań**: Elastyczne zarządzanie harmonogramem zadań, wspierające automatyczne wykonywanie skryptów i poleceń w instancjach WSL o określonych porach lub interwałach dla zautomatyzowanych operacji.
 - **Kompleksowa kontrola instancji**: Uruchamianie, zatrzymywanie, wymuszanie zatrzymania i wyrejestrowanie jednym kliknięciem. Monitorowanie statusu w czasie rzeczywistym, szczegółowe informacje o użyciu dysku i lokalizacji plików.
 - **Zarządzanie dystrybucjami**: Ustawianie jako domyślnej, migracja fizyczna (przenoszenie VHDX na inny dysk) oraz eksport/klonowanie do `.tar` lub `.tar.gz`.
+- **Montowanie dysków**: Bezpośrednie montowanie i zarządzanie wirtualnymi dyskami VHDX instancji WSL, obsługa montowania, odmontowywania i operacji zarządzania dyskami, ułatwiające przesyłanie plików między hostem a WSL.
 - **Szybka integracja**: Otwieranie terminala, VS Code lub eksploratora plików jednym kliknięciem, z obsługą niestandardowych katalogów roboczych i skryptów uruchomieniowych.
 - **Instalacja dystrybucji**: Instaluj dystrybucje Linuxa przez Microsoft Store, GitHub, pliki lokalne (RootFS/VHDX) lub lustra online (z automatycznym testem prędkości wyboru najszybszego lustra i wbudowanym asystentem pobierania RootFS).
 - **Globalne bezpieczeństwo**: Mutexy zapewniające bezpieczeństwo jednoczesnych operacji migracji/kopii zapasowych oraz automatyczne czyszczenie pakietów Appx przy usuwaniu.
@@ -176,6 +179,18 @@ Pliki logów są zapisywane w skonfigurowanym katalogu logów i można je dołą
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Montowanie dysków
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Harmonogram zadań
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Demonstracja
@@ -265,6 +280,19 @@ Upewnij się, że masz zainstalowany Rust toolchain (Rust 1.92+ lub nowszy).
   - **Efektywność zasobów**: Ekstremalnie niskie zużycie zasobów (patrz [Kluczowe funkcje](#-kluczowe-funkcje-i-użytkowanie)).
   - **Przenośność**: Zoptymalizowana wersja wydania generuje jeden kompaktowy plik wykonywalny.
 
+
+
+
+## 📢 Oficjalne Grupy Społeczności
+
+Zapraszamy do oficjalnych grup społeczności WSL UI! Dołącz do naszych kanałów, aby dyskutować porady dotyczące użytkowania, zgłaszać problemy, uzyskiwać najnowsze aktualizacje i łączyć się z deweloperami oraz innymi użytkownikami.
+
+| Globalna Grupa (Telegram) | Chińska Grupa (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Skanuj, aby dołączyć | Skanuj, aby dołączyć |
+
+---
 
 
 ## 🤝 Wsparcie społeczności

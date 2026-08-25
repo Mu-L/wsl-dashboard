@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - [💻 시스템 요구 사항](#-시스템-요구-사항)
 - [📦 설치 가이드](#-설치-가이드)
 - [🛠️ 기술 스택 및 성능](#️-기술-스택-및-성능)
+- [📢 공식 커뮤니티 그룹](#-공식-커뮤니티-그룹)
 - [🤝 커뮤니티 지원](#-커뮤니티-지원)
 - [❤️ 이 프로젝트 지원하기](#️-이-프로젝트-지원하기)
 - [⭐️ 사랑의 결실](#️-사랑의-결실)
@@ -110,8 +111,10 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - **현대적인 네이티브 UI**: 라이트/다크 모드 지원, 부드러운 애니메이션, **Skia** 기반의 고성능 렌더링을 갖춘 직관적인 GUI.
 - **시스템 트레이 통합**: 트레이 최소화 지원(메모리 사용량 약 10MB), 더블 클릭으로 창 전환, 실용적인 우클릭 메뉴 제공.
 - **지능형 시작 설정**: 윈도우 시작 시 자동 실행, 트레이로 최소화하여 시작(정숙 모드 `/silent`), 종료 시 배포판 자동 종료 기능을 설정할 수 있습니다.
+- **작업 스케줄링**: 유연한 작업 일정 관리를 통해 지정된 시간 또는 간격으로 WSL 인스턴스에서 스크립트와 명령을 자동으로 실행하여 자동화된 운영을 지원합니다.
 - **포괄적인 인스턴스 제어**: 클릭 한 번으로 시작, 중지, 강제 종료 및 등록 해제가 가능합니다. 실시간 상태 모니터링과 디스크 사용량 및 파일 위치에 대한 상세 정보를 제공합니다.
 - **배포판 관리**: 기본값 설정, 마이그레이션(VHDX 파일을 다른 드라이브로 이동), `.tar` 또는 `.tar.gz` 아카이브로 내보내기 및 복제가 가능합니다.
+- **디스크 마운트**: WSL 인스턴스의 VHDX 가상 디스크를 직접 마운트하고 관리합니다. 마운트, 마운트 해제, 디스크 관리 작업을 지원하며 호스트와 WSL 간의 파일 전송을 용이하게 합니다.
 - **빠른 통합**: 사용자 지정 작업 디렉토리 및 시작 스크립트 훅을 통해 터미널, VS Code 또는 파일 탐색기를 즉시 실행할 수 있습니다.
 - **배포판 설치**: Microsoft Store, GitHub, 로컬 파일(RootFS/VHDX) 또는 온라인 미러를 통해 Linux 배포판을 설치할 수 있습니다 (자동 속도 테스트로 가장 빠른 미러 선택, 내장 RootFS 다운로드 도우미 포함).
 - **글로벌 안전성**: 안전한 동시 마이그레이션/백업 작업을 위한 뮤텍스(Mutex) 잠금 및 삭제 시 자동 Appx 정리를 지원합니다.
@@ -176,6 +179,18 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### 디스크 마운트
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### 작업 스케줄링
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 작동 데모
@@ -266,6 +281,17 @@ Rust 툴체인(Rust 1.92 이상)이 설치되어 있는지 확인하세요.
   - **이식성**: 최적화된 릴리스 빌드는 단일 압축 실행 파일을 생성합니다.
 
 
+
+## 📢 공식 커뮤니티 그룹
+
+WSL UI 공식 커뮤니티 그룹에 오신 것을 환영합니다! 사용 팁 논의, 문제 보고, 최신 업데이트 파악, 개발자 및 다른 사용자들과 소통하기 위해 채널에 참여하세요.
+
+| 글로벌 그룹 (Telegram) | 중국 그룹 (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| 스캔하여 참여 | 스캔하여 참여 |
+
+---
 
 ## 🤝 커뮤니티 지원
 

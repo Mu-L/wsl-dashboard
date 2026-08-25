@@ -177,8 +177,18 @@ pub struct DonatePaymentMethod {
 }
 
 #[derive(Debug, Deserialize, Clone, Default)]
+pub struct DonationRecord {
+    #[allow(dead_code)]
+    pub name: String,
+    #[serde(default)]
+    pub url: String,
+}
+
+#[derive(Debug, Deserialize, Clone, Default)]
 pub struct DonateData {
     pub payment_methods: Vec<DonatePaymentMethod>,
+    #[serde(default)]
+    pub donation_record: Option<DonationRecord>,
 }
 
 // ============================================================
@@ -329,6 +339,8 @@ pub struct WslSupport {
     pub until_version: String,
     #[serde(default)]
     pub confirm: i32,
+    #[serde(default)]
+    pub url: String,
 }
 
 // Data field of the bootstrap API
@@ -356,5 +368,21 @@ pub struct CronExpressionLink {
 pub struct HelperSchedulerData {
     pub cron_expression: Option<CronExpressionLink>,
     pub command_docs: Option<CronExpressionLink>,
+}
+
+// ============================================================
+// 10. wslui_helper_mount data structure
+// ============================================================
+
+#[derive(Debug, Deserialize, Clone, Default)]
+pub struct MountDiskLink {
+    #[allow(dead_code)]
+    pub name: String,
+    pub url: String,
+}
+
+#[derive(Debug, Deserialize, Clone, Default)]
+pub struct HelperMountDiskData {
+    pub mount_disk: MountDiskLink,
 }
 

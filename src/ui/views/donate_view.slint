@@ -25,6 +25,7 @@ export component DonateView inherits VerticalLayout {
     in property <[string]> method_urls;
     in property <[string]> method_exts;
     in property <[image]> method_regions;
+    in property <string> donation_record_url;
     in property <DonateStrings> strings;
     padding-top: 0px;
     padding-bottom: 8px;
@@ -423,6 +424,63 @@ export component DonateView inherits VerticalLayout {
                                             root.copy_clicked(root.method_exts[i] != "" ? root.method_exts[i] : root.method_urls[i]);
                                         }
                                     }
+                                }
+                            }
+                        }
+
+                        // --- Donation records link (shown only when API returns a non-empty url) ---
+                        if (root.donation_record_url != ""): HorizontalLayout {
+                            spacing: 12px;
+                            alignment: AppI18n.is-rtl ? end : start;
+                            padding-top: 4px;
+
+                            if (!AppI18n.is-rtl): Rectangle {
+                                width: 20px;
+                                ThemedIcon {
+                                    y: 1px;
+                                    icon_code: "\u{e716}";
+                                    icon_type: "heart";
+                                    font-size: 15px;
+                                }
+                            }
+
+                            HorizontalLayout {
+                                spacing: 6px;
+                                Text {
+                                    text: root.strings.donation_note;
+                                    font-size: 13px * LayoutConstants.font-scale;
+                                    font-family: Theme.default_font;
+                                    color: Theme.text_secondary;
+                                    vertical-alignment: center;
+                                }
+                                ThemedIcon {
+                                    icon_code: "\u{e7e3}";
+                                    icon_type: "heart";
+                                    font-size: 15px;
+                                    vertical-alignment: center;
+                                }
+                                Text {
+                                    text: root.strings.donation_record;
+                                    font-size: 13px * LayoutConstants.font-scale;
+                                    font-family: Theme.default_font;
+                                    color: Theme.accent;
+                                    vertical-alignment: center;
+                                    TouchArea {
+                                        mouse-cursor: pointer;
+                                        clicked => {
+                                            root.open_url(root.donation_record_url);
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (AppI18n.is-rtl): Rectangle {
+                                width: 20px;
+                                ThemedIcon {
+                                    y: 1px;
+                                    icon_code: "\u{e716}";
+                                    icon_type: "heart";
+                                    font-size: 15px;
                                 }
                             }
                         }

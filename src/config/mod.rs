@@ -10,6 +10,7 @@ mod migration;
 pub mod instances;
 pub mod models;
 pub mod debug;
+pub mod mount;
 
 pub use models::*;
 pub use debug::DebugConfig;
@@ -356,8 +357,8 @@ impl ConfigManager {
         Self::load_usb_config()
     }
 
-    /// Toggle `boot-attach` for a device identified by bus_id.
-    /// If the device doesn't exist in config, create a new entry.
+    // Toggle `boot-attach` for a device identified by bus_id.
+    // If the device doesn't exist in config, create a new entry.
     pub fn toggle_usb_boot_attach(&mut self, bus_id: &str, vid_pid: &str, distro: &str) -> Result<bool, Box<dyn std::error::Error + Send + Sync>> {
         let mut config = Self::load_usb_config();
         let entry = config.usb.entry(vid_pid.to_string()).or_insert(UsbDeviceConfig {
@@ -377,7 +378,7 @@ impl ConfigManager {
         Ok(new_state)
     }
 
-    /// Set boot-attach for a device identified by vid_pid.
+    // Set boot-attach for a device identified by vid_pid.
     pub fn set_usb_boot_attach(&mut self, vid_pid: &str, bus_id: &str, enabled: bool) -> Result<bool, Box<dyn std::error::Error + Send + Sync>> {
         let mut config = Self::load_usb_config();
         let entry = config.usb.entry(vid_pid.to_string()).or_insert(UsbDeviceConfig {
@@ -399,7 +400,7 @@ impl ConfigManager {
         Ok(enabled)
     }
 
-    /// Set auto-attach for a device identified by vid_pid.
+    // Set auto-attach for a device identified by vid_pid.
     pub fn set_usb_auto_attach(&mut self, vid_pid: &str, enabled: bool) -> Result<bool, Box<dyn std::error::Error + Send + Sync>> {
         let mut config = Self::load_usb_config();
         let entry = config.usb.entry(vid_pid.to_string()).or_insert(UsbDeviceConfig {
@@ -416,7 +417,7 @@ impl ConfigManager {
         Ok(enabled)
     }
 
-    /// Toggle force-bind for a device identified by vid_pid.
+    // Toggle force-bind for a device identified by vid_pid.
     pub fn toggle_force_bind(&mut self, vid_pid: &str) -> Result<bool, Box<dyn std::error::Error + Send + Sync>> {
         let mut config = Self::load_usb_config();
         let entry = config.usb.entry(vid_pid.to_string()).or_insert(UsbDeviceConfig {
@@ -434,13 +435,13 @@ impl ConfigManager {
         Ok(new_state)
     }
 
-    /// Check if a device (by VID:PID) has force-bind enabled.
+    // Check if a device (by VID:PID) has force-bind enabled.
     pub fn is_force_bind(&self, vid_pid: &str) -> bool {
         let config = Self::load_usb_config();
         config.usb.get(vid_pid).map(|d| d.force_bind).unwrap_or(false)
     }
 
-    /// Get all devices with boot-attach enabled (for scheduler).
+    // Get all devices with boot-attach enabled (for scheduler).
     pub fn get_usb_boot_attach_devices(&self) -> Vec<UsbDeviceConfig> {
         let config = Self::load_usb_config();
         config.usb.values()
@@ -449,7 +450,7 @@ impl ConfigManager {
             .collect()
     }
 
-    /// Migrate old settings.toml USB config to usb.toml (one-time, only if usb.toml doesn't exist).
+    // Migrate old settings.toml USB config to usb.toml (one-time, only if usb.toml doesn't exist).
     pub fn migrate_usb_config() {
         let usb_path = Self::get_usb_config_path();
         if usb_path.exists() {

@@ -14,6 +14,7 @@ pub mod wsl_guide;
 pub mod donate;
 pub mod mail;
 pub mod scheduler;
+pub mod mount_disk;
 
 use std::sync::Arc;
 use tokio::sync::Mutex;
@@ -32,4 +33,5 @@ pub async fn setup(app: &AppWindow, app_handle: slint::Weak<AppWindow>, app_stat
     donate::setup(app, app_handle.clone(), app_state.clone());
     mail::setup(app, app_handle.clone());
     scheduler::setup(app, app_handle.clone(), app_state.clone());
+    mount_disk::setup(app, app_handle.clone(), app_state.clone());
 }

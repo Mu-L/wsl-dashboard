@@ -30,6 +30,7 @@ export struct Distro {
     has_icon: bool,
     initial: string,
     distro_display_name: string,
+    boot_run: bool,
 }
 
 export struct InstallableDistro {
@@ -107,6 +108,27 @@ export struct SchedulerTaskUI {
 
 }
 
+export struct PhysicalDiskInfo {
+    device_id: string,
+    model: string,
+    size: string,
+    index: int,
+    interface_type: string,
+    is_usb: bool,
+    display_text: string,
+}
+
+export struct MountedDiskInfo {
+    mount_id: string,
+    disk_path: string,
+    disk_type: string,
+    mount_point: string,
+    mount_time: string,
+    name: string,
+    is_bare: bool,
+    is_mounted: bool,
+}
+
 export struct SettingsStrings {
     language: string,
     auto_update: string,
@@ -128,6 +150,8 @@ export struct SettingsStrings {
     tab_interface: string,
     sparse_vhd: string,
     sparse_vhd_desc: string,
+    mount_auto_probe: string,
+    mount_auto_probe_desc: string,
     colorful_icons: string,
     mail_icon_always: string,
     hide_pin_icon: string,
@@ -160,6 +184,8 @@ export struct AboutStrings {
 export struct DonateStrings {
     donate_link_label: string,
     payment_methods_title: string,
+    donation_note: string,
+    donation_record: string,
     copied: string,
     copy_wallet: string,
     copy_email: string,

@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - [💻 Systémové požiadavky](#-systémové-požiadavky)
 - [📦 Inštalačná príručka](#-inštalačná-príručka)
 - [🛠️ Technologický zásobník a výkon](#️-technologický-zásobník-a-výkon)
+- [📢 Oficiálne komunitné skupiny](#-oficiálne-komunitné-skupiny)
 - [🤝 Podpora komunity](#-podpora-komunity)
 - [❤️ Podporiť tento projekt](#️-podporiť-tento-projekt)
 - [⭐️ Dielo z lásky](#️-dielo-z-lásky)
@@ -110,8 +111,10 @@ Angličtina, zjednodušená čínština, tradičná čínština, hindčina, špa
 - **Moderné natívne UI**: Intuitívne grafické rozhranie s podporou tmavého/svetlého režimu, plynulými animáciami a vysoko výkonným vykresľovaním pomocou engine **Skia**.
 - **Integrácia do systémovej lišty (Tray)**: Úplná podpora minimalizácie do lišty (využitie RAM ~10 MB), obnovenie dvojitým kliknutím a funkčná kontextová ponuka pravým tlačidlom.
 - **Inteligentné spúšťanie**: Nakonfigurujte panel tak, aby sa spúšťal so systémom Windows, minimalizoval sa do lišty (tichý režim s parametrom `/silent`) a automaticky ukončoval distribúcie pri ukončení.
+- **Plánovanie úloh**: Flexibilné riadenie plánovania úloh, podporujúce automatické vykonávanie skriptov a príkazov v inštanciách WSL v určených časoch alebo intervaloch pre automatizované operácie.
 - **Komplexná správa inštancií**: Spustenie, zastavenie, ukončenie a zrušenie registrácie jedným kliknutím. Sledovanie stavu v reálnom čase a podrobné informácie o zaplnení disku a umiestnení súborov.
 - **Správa distribúcií**: Nastavenie ako predvolené, migrácia (presun VHDX na iné disky) a export/klonovanie do archívov `.tar` alebo `.tar.gz`.
+- **Pripojenie disku**: Priame pripojenie a správa VHDX virtuálnych diskov inštancií WSL, podpora pripojenia, odpojenia a operácií správy diskov, uľahčujúce prenos súborov medzi hostiteľským systémom a WSL.
 - **Rýchla integrácia**: Okamžité spúšťanie Terminálu, VS Code alebo Prieskumníka súborov s prispôsobiteľnými pracovnými adresármi a háčikmi pre spúšťacie skripty.
 - **Inštalácia distribúcie**: Inštalujte Linux distribúcie cez Microsoft Store, GitHub, lokálne súbory (RootFS/VHDX) alebo online zrkadlá (s automatickým testom rýchlosti pre výber najrýchlejšieho zrkadla a vstavaným pomocníkom na sťahovanie RootFS).
 - **Bezpečnosť**: Zámky mutex pre bezpečné súbežné migračné a zálohovacie operácie a automatické čistenie Appx pri odoberaní.
@@ -176,6 +179,18 @@ Súbory protokolov sa zapisujú do nakonfigurovaného adresára a možno ich pri
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Pripojenie disku
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Plánovanie úloh
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Ukážka prevádzky
@@ -266,6 +281,17 @@ Uistite sa, že máte nainštalovanú sadu nástrojov Rust (Rust 1.92+ alebo nov
   - **Prenositeľnosť**: Optimalizované zostavenie produkuje jediný kompaktný spustiteľný súbor.
 
 
+
+## 📢 Oficiálne komunitné skupiny
+
+Vitajte v oficiálnych komunitných skupinách WSL UI! Pripojte sa k našim kanálom na diskusiu o tipy na použitie, nahlásenie problémov, získanie najnovších aktualizácií a prepojenie s vývojármi a ďalšími používateľmi.
+
+| Globálna skupina (Telegram) | Čínska skupina (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Naskenujte pre pripojenie | Naskenujte pre pripojenie |
+
+---
 
 ## 🤝 Podpora komunity
 

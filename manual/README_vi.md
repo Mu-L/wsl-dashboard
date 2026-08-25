@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - [💻 Yêu cầu hệ thống](#-yêu-cầu-hệ-thống)
 - [📦 Hướng dẫn cài đặt](#-hướng-dẫn-cài-đặt)
 - [🛠️ Công nghệ & Hiệu suất](#️-công-nghệ--hiệu-suất)
+- [📢 Nhóm Cộng đồng Chính thức](#-nhóm-cộng-đồng-chính-thức)
 - [🤝 Hỗ trợ cộng đồng](#-hỗ-trợ-cộng-đồng)
 - [❤️ Hỗ trợ dự án](#️-hỗ-trợ-dự-án)
 - [⭐️Ủng hộ từ trái tim](#️ủng-hộ-từ-trái-tim)
@@ -110,8 +111,10 @@ Tiếng Anh, Tiếng Trung (Giản thể), Tiếng Trung (Phồn thể), Tiếng
 - **Giao diện gốc hiện đại**: GUI trực quan, hỗ trợ chế độ tối/sáng, hoạt ảnh mượt mà, kết xuất hiệu suất cao được hỗ trợ bởi **Skia**.
 - **Tích hợp khay hệ thống**: Hỗ trợ khay đầy đủ (chiếm khoảng 10MB bộ nhớ), nhấp đúp để ẩn/hiện và menu chuột phải đầy đủ tính năng.
 - **Khởi động thông minh**: Hỗ trợ khởi động cùng Windows, thu nhỏ vào khay (khởi động im lặng với tham số `/silent`), và tự động tắt các bản phân phối khi thoát.
+- **Lập lịch tác vụ**: Quản lý lập lịch tác vụ linh hoạt, hỗ trợ tự động thực thi các tập lệnh và lệnh trong các phiên bản WSL vào thời gian hoặc khoảng thời gian xác định cho các hoạt động tự động hóa.
 - **Kiểm soát phiên bản toàn diện**: Khởi động, dừng, buộc dừng và gỡ đăng ký chỉ bằng một nhấp. Giám sát trạng thái thời gian thực, xem chi tiết dung lượng ổ đĩa và vị trí tệp.
 - **Quản lý bản phân phối**: Đặt làm mặc định, di chuyển vật lý (chuyển VHDX sang ổ đĩa khác), và xuất/sao lưu dưới dạng `.tar` hoặc `.tar.gz`.
+- **Gắn đĩa**: Trực tiếp gắn và quản lý các đĩa ảo VHDX của phiên bản WSL, hỗ trợ các thao tác gắn, tháo và quản lý đĩa, giúp dễ dàng truyền tệp giữa máy chủ và WSL.
 - **Tích hợp nhanh**: Mở terminal, VS Code hoặc trình quản lý tệp chỉ bằng một nhấp, hỗ trợ thư mục làm việc tùy chỉnh và script hook khởi chạy.
 - **Cài đặt bản phân phối**: Cài đặt các bản phân phối Linux qua Microsoft Store, GitHub, tệp cục bộ (RootFS/VHDX) hoặc mirror trực tuyến (với tự động kiểm tra tốc độ để chọn mirror nhanh nhất và trợ giúp tải RootFS tích hợp).
 - **Bảo mật toàn cục**: Sử dụng mutex để đảm bảo an toàn cho các thao tác di chuyển/sao lưu đồng thời, và tự động dọn dẹp gói Appx khi xóa.
@@ -176,6 +179,18 @@ Tệp nhật ký sẽ được ghi vào thư mục nhật ký đã cấu hình, 
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Gắn đĩa
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Lập lịch tác vụ
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Demo thao tác
@@ -265,6 +280,18 @@ Không cần cài đặt, ứng dụng là chương trình di động một tệ
   - **Hiệu quả tài nguyên**: Chiếm dụng tài nguyên cực thấp (xem [Tính năng cốt lõi](#-tính-năng-cốt-lõi--sử-dụng)).
   - **Tính di động**: Phiên bản phát hành tối ưu tạo ra một tệp thực thi duy nhất gọn nhẹ.
 
+
+
+## 📢 Nhóm Cộng đồng Chính thức
+
+Chào mừng bạn đến với các nhóm cộng đồng chính thức của WSL UI! Tham gia kênh của chúng tôi để thảo luận mẹo sử dụng, báo cáo vấn đề, nhận cập nhật mới nhất và kết nối với nhà phát triển và người dùng khác.
+
+| Nhóm Toàn cầu (Telegram) | Nhóm Tiếng Trung (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Quét để tham gia | Quét để tham gia |
+
+---
 
 
 ## 🤝 Hỗ trợ cộng đồng

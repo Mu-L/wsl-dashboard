@@ -1,0 +1,147 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 owu <wqh@live.com>
+// SPDX-License-Identifier: GPL-3.0-only
+
+import { Theme, AppI18n, LayoutConstants, MountedDiskInfo } from "../theme.slint";
+import { CustomButton } from "../components/form_widgets.slint";
+import { CustomScrollbar } from "../components/scrollbar.slint";
+import { MountDiskCard } from "../components/mount_disk_card.slint";
+
+export component MountDiskView inherits Rectangle {
+    in property <[MountedDiskInfo]> mounted_disks: [];
+
+    callback open_mount_dialog();
+    callback refresh_list();
+    callback unmount_disk(string);
+    callback delete_disk(string);
+    callback mount_disk(string);
+
+    VerticalLayout {
+        padding: 0px;
+        spacing: 0px;
+
+        // Content area with scroll
+        Rectangle {
+            vertical-stretch: 1;
+            clip: true;
+
+            flick := Flickable {
+                viewport-height: container.preferred-height;
+                width: parent.width;
+                height: 100%;
+
+                container := VerticalLayout {
+                    spacing: 8px;
+                    padding-top: 4px;
+                    padding-bottom: 6px;
+                    padding-left: 4px;
+                    padding-right: 16px;
+
+                    // Mounted disk list
+                    for disk in root.mounted_disks: MountDiskCard {
+                        disk: disk;
+                        unmount_clicked(path) => {
+                            root.unmount_disk(path);
+                        }
+                        delete_clicked(path) => {
+                            root.delete_disk(path);
+                        }
+                        mount_clicked(path) => {
+                            root.mount_disk(path);
+                        }
+                    }
+
+                    // Empty state
+                    if (root.mounted_disks.length == 0): VerticalLayout {
+                        alignment: center;
+                        spacing: 14px;
+                        padding: 60px;
+
+                        Text {
+                            text: "\u{e772}"; // Hard drive icon
+                            font-family: Theme.icon_font;
+                            font-size: 32px;
+                            color: Theme.accent;
+                            horizontal-alignment: center;
+                            opacity: 0.3;
+                        }
+
+                        Text {
+                            text: AppI18n.t("mount_disk.no_mounted", [AppI18n.version]);
+                            font-size: 14px * LayoutConstants.font-scale;
+                            font-family: Theme.default_font;
+                            color: Theme.text_secondary;
+                            horizontal-alignment: center;
+                        }
+                    }
+
+                }
+            }
+
+            CustomScrollbar {
+                opacity: (flick.viewport-height > flick.height) ? 1 : 0;
+                visible: flick.viewport-height > flick.height;
+                x: AppI18n.is-rtl ? 2px : parent.width - 8px;
+                y: 0;
+                width: 8px;
+                height: 100%;
+                maximum: flick.viewport-height - flick.height;
+                page_size: flick.height;
+                value: -flick.viewport-y;
+                scroll_to(v) => {
+                    flick.viewport-y = -v;
+                }
+            }
+        }
+
+        // Bottom Action Bar - Mount Disk & Refresh Buttons
+        HorizontalLayout {
+            padding-top: 6px;
+            padding-bottom: 4px;
+            padding-right: AppI18n.is-rtl ? 4px : 12px;
+            padding-left: AppI18n.is-rtl ? 12px : 4px;
+            spacing: 8px;
+
+            if (!AppI18n.is-rtl): CustomButton {
+                text: AppI18n.t("mount_disk.refresh", [AppI18n.version]);
+                height: 32px;
+                clicked => {
+                    root.refresh_list();
+                }
+            }
+
+            if (!AppI18n.is-rtl): Rectangle {
+                horizontal-stretch: 1;
+            }
+
+            if (!AppI18n.is-rtl): CustomButton {
+                text: AppI18n.t("mount_disk.mount_btn", [AppI18n.version]);
+                primary: true;
+                height: 32px;
+                clicked => {
+                    root.open_mount_dialog();
+                }
+            }
+
+            if (AppI18n.is-rtl): CustomButton {
+                text: AppI18n.t("mount_disk.mount_btn", [AppI18n.version]);
+                primary: true;
+                height: 32px;
+                clicked => {
+                    root.open_mount_dialog();
+                }
+            }
+
+            if (AppI18n.is-rtl): Rectangle {
+                horizontal-stretch: 1;
+            }
+
+            if (AppI18n.is-rtl): CustomButton {
+                text: AppI18n.t("mount_disk.refresh", [AppI18n.version]);
+                height: 32px;
+                clicked => {
+                    root.refresh_list();
+                }
+            }
+        }
+    }
+}

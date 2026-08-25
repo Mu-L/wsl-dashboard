@@ -186,7 +186,7 @@ export component CustomCheckBox inherits Rectangle {
     background: transparent;
     opacity: root.enabled ? 1.0 : 0.5;
     HorizontalLayout {
-        spacing: 12px;
+        spacing: 6px;
         alignment: AppI18n.is-rtl ? end : start;
 
         // Check Box Container
@@ -274,7 +274,7 @@ export component CustomRadioButton inherits Rectangle {
     opacity: root.enabled ? 1.0 : 0.5;
 
     HorizontalLayout {
-        spacing: 12px;
+        spacing: 6px;
         alignment: AppI18n.is-rtl ? end : start;
 
         if (!AppI18n.is-rtl): Rectangle {

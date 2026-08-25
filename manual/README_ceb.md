@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - [💻 Mga Kinahanglanon sa Sistema](#-mga-kinahanglanon-sa-sistema)
 - [📦 Giya sa Pag-install](#-giya-sa-pag-install)
 - [🛠️ Tech Stack ug Performance](#️-tech-stack-ug-performance)
+- [📢 Opisyal na Komunidad Grupo](#-opisyal-na-komunidad-grupo)
 - [🤝 Pagsuporta sa Komunidad](#-pagsuporta-sa-komunidad)
 - [❤️ Suportaha Kini nga Proyekto](#️-suportaha-kini-nga-proyekto)
 - [⭐️ Alang sa Gugma](#️-alang-sa-gugma)
@@ -110,8 +111,10 @@ English, Simplified Chinese, Traditional Chinese, Hindi, Spanish, French, Arabic
 - **Modernong Native UI**: Intuitive nga GUI nga adunay dark/light mode, hapsay nga animation, ug high-performance rendering nga gidagan sa **Skia**.
 - **System Tray Integration**: Bug-os nga pagsuporta sa tray (~10MB memory usage), nga adunay toggle sa display/hide pinaagi sa double-click ug fully functional right-click menu.
 - **Smart Startup**: Pagsuporta sa auto-start sa boot, minimize sa tray (gamit ang `/silent` parameter sa pag-start nga walay tunog), ug auto-close sa distro sa paggawas.
+- **Pag-iskedyul sa Taksa**: Flexible nga pagdumala sa pag-iskedyul sa mga taksa, nagsuporta sa awtomatikong pag-execute sa mga script ug commands sa WSL instances sa gitakda nga oras o interval para sa automated nga operasyon.
 - **Bug-os nga Pagkontrol sa Instance**: Sugdi, hunong, patya, ug i-unregister sa usa ka pag-klik. Real-time nga pag-monitor sa status, pagtan-aw sa paggamit sa disk ug lokasyon sa file.
 - **Pagdumala sa Distro**: I-set isip default, pisikal nga pagbalhin (ibalhin ang VHDX sa lain disk), ug pag-export/clone isip `.tar` o `.tar.gz` archive.
+- **Disk Mount**: Direktang i-mount ug i-manage ang WSL instance VHDX virtual disk, nagsuporta sa mount, unmount, ug disk management operations, mas sayon ang pagbalhin sa mga file tali sa host ug WSL.
 - **Dali nga Pag-integrate**: Usa ka pag-click sa pag-abli sa terminal, VS Code, o File Explorer, nga adunay pagsuporta sa custom working directory ug startup script hooks.
 - **Distro Installation**: Pag-install sa mga Linux distribution pinaagi sa Microsoft Store, GitHub, lokal nga file (RootFS/VHDX), o mga Online Mirror (nga adunay auto speed-test aron mapili ang pinakadali nga mirror ug built-in nga RootFS download helper).
 - **Global Security**: Paggamit sa mutex aron masiguro ang seguridad sa sabay nga pag-migrate/backup operations, ug auto-cleanup sa Appx packages sa pagtangtang.
@@ -176,6 +179,16 @@ Ang mga log file isulat sa gi-configure nga log directory, ug mahimong i-attach 
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Disk Mount
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+</p>
+
+### Pag-iskedyul sa Taksa
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
 </p>
 
 ## 🎬 Demo sa Operasyon
@@ -264,6 +277,19 @@ Siguruha nga ang Rust toolchain gi-install (Rust 1.92+ o mas bag-ong bersyon).
   - **Speed sa Pagtubol**: Halos instant nga pag-start, ug real-time nga pag-monitor sa WSL status.
   - **Resource Efficiency**: Grabe ka ubos nga resource usage (tan-awa ang mga detalye sa [Panguna nga Bahin](#-mga-panguna-nga-bahin-ug-paggamit)).
   - **Portability**: Ang optimized release version nagmugna ug usa ka compact executable file.
+
+
+
+## 📢 Opisyal na Komunidad Grupo
+
+Malipayong pag-abot sa opisyal na mga grupo sa komunidad sa WSL UI! Sumali sa among mga channel para sa diskusyon sa mga tips sa paggamit, pag-report sa mga problema, pagkuha sa mga labing bag-ong update, ug pagkonekta sa mga developer ug uban pang mga user.
+
+| Global Group (Telegram) | Chinese Group (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Scan para sumali | Scan para sumali |
+
+---
 
 
 

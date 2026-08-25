@@ -19,6 +19,8 @@ pub mod runner;
 pub mod cli;
 pub mod launcher;
 pub mod lifecycle;
+pub mod mount_disk;
+pub mod startup_info;
 
 pub use constants::*;
 pub use state::{AppState, VSCodeExtensionData};

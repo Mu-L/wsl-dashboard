@@ -83,7 +83,7 @@ jobs:
           Invoke-WebRequest -Uri "https://aka.ms/wingetcreate/latest" -OutFile $wingetcreatePath
 
           Write-Host "Submitting manifests from: $manifestDir"
-          & $wingetcreatePath submit $manifestDir --token "${{ secrets.WINGET_GITHUB_TOKEN }}"
+          & $wingetcreatePath submit $manifestDir --token "${{ secrets.WINGET_GITHUB_TOKEN }}" --prtitle "New version: Owu.WSLDashboard version $version"
 
           if ($LASTEXITCODE -ne 0) {
             Write-Error "wingetcreate submission failed!"

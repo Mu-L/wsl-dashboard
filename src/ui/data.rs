@@ -116,6 +116,8 @@ pub fn refresh_localized_strings(app: &AppWindow) {
         tab_interface: i18n::tr("settings.tab_interface", &[]).into(),
         sparse_vhd: i18n::tr("settings.sparse_vhd", &[]).into(),
         sparse_vhd_desc: i18n::tr("settings.sparse_vhd_desc", &[]).into(),
+        mount_auto_probe: i18n::tr("settings.mount_auto_probe", &[]).into(),
+        mount_auto_probe_desc: i18n::tr("settings.mount_auto_probe_desc", &[]).into(),
         colorful_icons: i18n::tr("settings.colorful_icons", &[]).into(),
         mail_icon_always: i18n::tr("settings.mail_icon_always", &[]).into(),
         hide_pin_icon: i18n::tr("settings.hide_pin_icon", &[]).into(),
@@ -156,6 +158,8 @@ pub fn refresh_localized_strings(app: &AppWindow) {
     app.set_donate_strings(crate::DonateStrings {
         donate_link_label: i18n::tr("donate.donate_link_label", &[]).into(),
         payment_methods_title: i18n::tr("donate.payment_methods_title", &[]).into(),
+        donation_note: i18n::tr("donate.donation_note", &[]).into(),
+        donation_record: i18n::tr("donate.donation_record", &[]).into(),
         copied: i18n::tr("donate.copied", &[]).into(),
         copy_wallet: i18n::tr("donate.copy_wallet", &[]).into(),
         copy_email: i18n::tr("donate.copy_email", &[]).into(),
@@ -244,7 +248,7 @@ pub async fn refresh_data(app_handle: slint::Weak<AppWindow>, app_state: Arc<Mut
 static IS_REFRESHING: AtomicBool = AtomicBool::new(false);
 
 // Global static snapshot to prevent redundant refreshes across all threads
-static LAST_REFRESH_SNAPSHOT: Lazy<std::sync::Mutex<Option<Vec<(String, String, String, bool, Option<&'static str>)>>>> = Lazy::new(|| std::sync::Mutex::new(None));
+static LAST_REFRESH_SNAPSHOT: Lazy<std::sync::Mutex<Option<Vec<(String, String, String, bool, Option<&'static str>, bool)>>>> = Lazy::new(|| std::sync::Mutex::new(None));
 static LAST_INSTALLABLE_SNAPSHOT: Lazy<std::sync::Mutex<Option<Vec<String>>>> = Lazy::new(|| std::sync::Mutex::new(None));
 
 // Refresh UI list of installed distributions
@@ -294,13 +298,17 @@ pub async fn refresh_distros_ui(app_handle: slint::Weak<AppWindow>, app_state: A
     };
 
     // Quick check: has the actual data changed before we do heavy icon loading?
-    let current_snapshot: Vec<(String, String, String, bool, Option<&'static str>)> = distros.iter().map(|d| {
+    let instances_path = crate::config::ConfigManager::get_instances_path();
+    let container = crate::config::instances::load_instances(&instances_path);
+    let current_snapshot: Vec<(String, String, String, bool, Option<&'static str>, bool)> = distros.iter().map(|d| {
+        let auto_startup = container.instances.get(&d.name).map(|c| c.auto_startup).unwrap_or(false);
         (
             d.name.clone(),
             format!("{:?}", d.status),
             format!("{:?}", d.version),
             d.is_default,
-            crate::utils::icon_mapper::map_name_to_icon_key(&d.name)
+            crate::utils::icon_mapper::map_name_to_icon_key(&d.name),
+            auto_startup,
         )
     }).collect();
 
@@ -354,6 +362,7 @@ pub async fn refresh_distros_ui(app_handle: slint::Weak<AppWindow>, app_state: A
                 icon_key,
                 crate::utils::icon_mapper::get_initial(&d.name),
                 icon_key.and_then(crate::utils::icon_mapper::load_icon_data),
+                container.instances.get(&d.name).map(|c| c.auto_startup).unwrap_or(false),
             ));
         }
 
@@ -419,7 +428,7 @@ pub async fn refresh_distros_ui(app_handle: slint::Weak<AppWindow>, app_state: A
 
         if let Some(app) = app_handle.upgrade() {
             if data_changed {
-                let slint_distros: Vec<Distro> = intermediate_distros.into_iter().map(|(name, status, version, is_default, icon_key, initial, preloaded_icon)| {
+                let slint_distros: Vec<Distro> = intermediate_distros.into_iter().map(|(name, status, version, is_default, icon_key, initial, preloaded_icon, auto_startup)| {
                     let mut image = slint::Image::default();
                     let mut has_icon = false;
                     
@@ -440,6 +449,7 @@ pub async fn refresh_distros_ui(app_handle: slint::Weak<AppWindow>, app_state: A
                         has_icon,
                         initial: initial.into(),
                         distro_display_name: crate::utils::icon_mapper::get_display_name(icon_key).into(),
+                        boot_run: auto_startup,
                     }
                 }).collect();
 
@@ -455,7 +465,8 @@ pub async fn refresh_distros_ui(app_handle: slint::Weak<AppWindow>, app_state: A
                             if old_distro.name != new_distro.name 
                                 || old_distro.status != new_distro.status
                                 || old_distro.is_default != new_distro.is_default 
-                                || old_distro.has_icon != new_distro.has_icon {
+                                || old_distro.has_icon != new_distro.has_icon
+                                || old_distro.boot_run != new_distro.boot_run {
                                 data_actually_changed = true;
                                 break;
                             }
@@ -894,6 +905,8 @@ pub async fn load_settings_to_ui(app: &AppWindow, app_state: &Arc<Mutex<AppState
     app.set_sidebar_add(sidebar.add);
     app.set_sidebar_usb(sidebar.usb);
     app.set_sidebar_network(sidebar.network);
+    app.set_sidebar_scheduler(sidebar.scheduler);
+    app.set_sidebar_mount(sidebar.mount);
     app.set_sidebar_about(sidebar.about);
     app.set_sidebar_donate(sidebar.donate);
 
@@ -943,6 +956,7 @@ pub async fn load_settings_to_ui(app: &AppWindow, app_state: &Arc<Mutex<AppState
 
     let sparse_vhd = crate::utils::wsl_config::get_sparse_vhd();
     app.set_sparse_vhd(sparse_vhd);
+    app.set_mount_auto_probe(settings.mount_auto_probe);
 
     debug!("Configuration loaded to UI (Language: {}, Mode: {}, LogLevel: {}, LogDays: {})", 
           settings.ui_language, if settings.dark_mode { "Dark" } else { "Light" }, settings.log_level, log_days);

@@ -141,14 +141,21 @@ fn build_tasks(records: Vec<RawSchtasksRecord>) -> Result<Vec<SchedulerTask>, St
     let mut tasks = Vec::new();
 
     for record in records {
-        let (admin_mode, cron_expr, author, state) = query_task_xml_info(&record.task_name);
+        let (admin_mode, cron_expr, author, xml_enabled) = query_task_xml_info(&record.task_name);
 
-        // State is locale-independent numeric value from XML:
-        // 0=Unknown, 1=Disabled, 2=Queued, 3=Ready, 4=Running
-        let is_disabled = state == "1";
-        let is_running = state == "4";
+        // <Enabled> from XML is the authoritative, locale-independent source for
+        // enabled/disabled state. schtasks /XML does NOT emit a <State> element;
+        // the enabled flag lives under <Settings><Enabled>true|false</Enabled>.
+        // Default to true when the element is missing (e.g., XML query failed).
+        let enabled = xml_enabled.unwrap_or(true);
+        let is_disabled = !enabled;
 
-        let enabled = !is_disabled;
+        // "Running" is the only runtime state we surface on the card. The CSV
+        // /V "Status" column is locale-dependent, but it is the only readily
+        // available source for running state without an extra PowerShell call.
+        let csv_status = record.status.trim();
+        let is_running = csv_status.eq_ignore_ascii_case("Running");
+
         let status = if is_running {
             "Running".to_string()
         } else if is_disabled {
@@ -225,8 +232,10 @@ fn build_description_command(task_name: &str, cron_expr: &str) -> String {
     format!("powershell -NoProfile -Command \"{}\"", ps_cmd.replace('"', "\\\""))
 }
 
-// Query task XML to extract RunLevel, cron expression, Author, and state
-fn query_task_xml_info(task_name: &str) -> (bool, String, String, String) {
+// Query task XML to extract RunLevel, cron expression, Author, and enabled state.
+// Returns (admin_mode, cron_expr, author, enabled) where `enabled` is None if the
+// <Enabled> element could not be located in the XML.
+fn query_task_xml_info(task_name: &str) -> (bool, String, String, Option<bool>) {
     let output = Command::new("schtasks")
         .args(["/Query", "/TN", task_name, "/XML"])
         .creation_flags(CREATE_NO_WINDOW)
@@ -238,10 +247,10 @@ fn query_task_xml_info(task_name: &str) -> (bool, String, String, String) {
             let admin_mode = xml.contains("<RunLevel>HighestAvailable</RunLevel>");
             let cron = extract_cron_from_xml(&xml);
             let author = extract_author_from_xml(&xml);
-            let state = extract_state_from_xml(&xml);
-            (admin_mode, cron, author, state)
+            let enabled = extract_enabled_from_xml(&xml);
+            (admin_mode, cron, author, enabled)
         }
-        _ => (false, String::new(), String::new(), String::new()),
+        _ => (false, String::new(), String::new(), None),
     }
 }
 
@@ -270,16 +279,21 @@ fn extract_author_from_xml(xml: &str) -> String {
     String::new()
 }
 
-// Extract task state from XML (numeric, locale-independent).
-// 0=Unknown, 1=Disabled, 2=Queued, 3=Ready, 4=Running
-fn extract_state_from_xml(xml: &str) -> String {
-    if let Some(start) = xml.find("<State>") {
-        let content_start = start + "<State>".len();
-        if let Some(end) = xml[content_start..].find("</State>") {
-            return xml[content_start..content_start + end].trim().to_string();
-        }
+// Extract <Enabled> value from task XML Settings.
+// schtasks /XML does NOT emit a <State> element; the runtime enabled/disabled
+// flag is stored under <Settings><Enabled>true|false</Enabled>. This value is
+// locale-independent and authoritative for the enabled/disabled distinction.
+// Returns None if the element is not present.
+fn extract_enabled_from_xml(xml: &str) -> Option<bool> {
+    let start = xml.find("<Enabled>")?;
+    let content_start = start + "<Enabled>".len();
+    let end = xml[content_start..].find("</Enabled>")?;
+    let val = xml[content_start..content_start + end].trim().to_ascii_lowercase();
+    match val.as_str() {
+        "true" => Some(true),
+        "false" => Some(false),
+        _ => None,
     }
-    String::new()
 }
 
 // Strip known command wrappers to recover the original command path.

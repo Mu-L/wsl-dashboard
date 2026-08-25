@@ -110,6 +110,7 @@ pub fn setup(app: &AppWindow, app_handle: slint::Weak<AppWindow>, app_state: Arc
                 let log_level = app.get_log_level() as u8;
                 let log_days = app.get_log_days() as u8;
                 let sparse_vhd = app.get_sparse_vhd();
+                let mount_auto_probe = app.get_mount_auto_probe();
                 
                 // Write sparseVhd directly to ~/.wslconfig
                 if let Err(e) = crate::utils::wsl_config::set_sparse_vhd(sparse_vhd) {
@@ -133,6 +134,7 @@ pub fn setup(app: &AppWindow, app_handle: slint::Weak<AppWindow>, app_state: Arc
                 settings.distro_location = distro_location;
                 settings.logs_location = logs_location;
                 settings.auto_shutdown = auto_shutdown;
+                settings.mount_auto_probe = mount_auto_probe;
                 settings.log_level = log_level;
                 settings.log_days = log_days;
 
@@ -173,6 +175,8 @@ pub fn setup(app: &AppWindow, app_handle: slint::Weak<AppWindow>, app_state: Arc
                 let sidebar_toggle = app.get_sidebar_toggle();
                 let sidebar_usb = app.get_sidebar_usb();
                 let sidebar_network = app.get_sidebar_network();
+                let sidebar_scheduler = app.get_sidebar_scheduler();
+                let sidebar_mount = app.get_sidebar_mount();
                 let sidebar_donate = app.get_sidebar_donate();
                 let sidebar_about = app.get_sidebar_about();
                 let colorful_icons = app.get_colorful_icons();
@@ -226,6 +230,8 @@ pub fn setup(app: &AppWindow, app_handle: slint::Weak<AppWindow>, app_state: Arc
                     toggle: sidebar_toggle,
                     usb: sidebar_usb,
                     network: sidebar_network,
+                    scheduler: sidebar_scheduler,
+                    mount: sidebar_mount,
                     donate: sidebar_donate,
                     about: sidebar_about,
                 };

@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - [💻 Rendszerkövetelmények](#-rendszerkövetelmények)
 - [📦 Telepítési útmutató](#-telepítési-útmutató)
 - [🛠️ Technológiai háttér és teljesítmény](#️-technológiai-háttér-és-teljesítmény)
+- [📢 Hivatalos Közösségi Csoportok](#-hivatalos-közösségi-csoportok)
 - [🤝 Közösségi támogatás](#-közösségi-támogatás)
 - [❤️ Támogassa ezt a projektet](#️-támogassa-ezt-a-projektet)
 - [⭐️ Szerelemprojekt](#️-szerelemprojekt)
@@ -110,8 +111,10 @@ Angol, egyszerűsített kínai, hagyományos kínai, hindi, spanyol, francia, ar
 - **Modern natív felület**: Intuitív grafikus felhasználói felület sötét/világos mód támogatással, folyamatos animációkkal és nagy teljesítményű, **Skia** alapú megjelenítéssel.
 - **Rendszertálca integráció**: Teljes körű támogatás a tálcára kicsinyítéshez (~10 MB RAM használat), dupla kattintás az ablak megjelenítéséhez/elrejtéséhez, valamint funkcionális jobb gombos menü.
 - **Intelligens indítás**: Konfigurálható a Windows-zal együtt történő indulás, tálcára kicsinyített indítás (csendes mód a `/silent` opcióval), és a disztribúciók automatikus leállítása kilépéskor.
+- **Feladatütemezés**: Rugalmas feladatütemezési kezelés, amely támogatja a szkriptek és parancsok automatikus végrehajtását WSL-példányokban meghatározott időpontokban vagy időközönként az automatizált műveletekhez.
 - **Átfogó példánykezelés**: Indítás, leállítás, kényszerített leállítás és regisztráció törlése egyetlen kattintással. Valós idejű állapotfigyelés, részletes adatok a lemezhasználatról és a fájlok helyéről.
 - **Disztribúció-kezelés**: Alapértelmezetté tétel, migrálás (VHDX mozgatása más meghajtókra), valamint exportálás/klónozás `.tar` vagy `.tar.gz` archívumokba.
+- **Lemez csatlakoztatás**: WSL-példányok VHDX virtuális lemezeinek közvetlen csatlakoztatása és kezelése, támogatja a csatlakoztatást, leválasztást és lemezkezelési műveleteket, megkönnyítve a fájlok átvitelét a gazdagép és a WSL között.
 - **Gyors integráció**: Azonnali indítás Terminálba, VS Code-ba vagy Fájlkezelőbe, testreszabható munkakönyvtárakkal és indítási parancsfájl-kezeléssel.
 - **Disztribúció telepítés**: Linux disztribúciók telepítése Microsoft Store, GitHub, helyi fájlok (RootFS/VHDX) vagy online tükrök segítségével (automatikus sebességteszttel a leggyorsabb tükör kiválasztásához és beépített RootFS letöltési segéddel).
 - **Biztonság**: Mutex zárolás a biztonságos egyidejű migrálási/mentési műveletekhez, és automatikus Appx tisztítás eltávolításkor.
@@ -176,6 +179,18 @@ A naplófájlok a konfigurált könyvtárba íródnak, és csatolhatók hiba jel
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Lemez csatlakoztatás
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Feladatütemezés
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Működési bemutató
@@ -265,6 +280,18 @@ Győződjön meg arról, hogy a Rust eszközkészlet (Rust 1.92+ vagy újabb) te
   - **Hatékonyság**: Rendkívül alacsony erőforrás-használat (részletekért lásd: [Főbb jellemzők](#-főbb-jellemzők-és-használat)).
   - **Hordozhatóság**: Az optimalizált kiadási verzió egyetlen kompakt futtatható fájlt eredményez.
 
+
+
+## 📢 Hivatalos Közösségi Csoportok
+
+Üdvözöljük a WSL UI hivatalos közösségi csoportjaiban! Csatlakozzon, hogy megbeszélje a tippeket, jelentse a problémákat, kapjon frissítéseket, és vegye fel a kapcsolatot a fejlesztőkkel és más felhasználókkal.
+
+| Globális csoport (Telegram) | Kínai csoport (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Szkennereld a csatlakozáshoz | Szkennereld a csatlakozáshoz |
+
+---
 
 
 ## 🤝 Közösségi támogatás

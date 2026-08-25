@@ -7,10 +7,12 @@ use crate::network;
 use crate::app::WSL_INIT_SCRIPT;
 
 // Execute network sync and USB auto-attach tasks triggered by Task Scheduler (/scheduler)
-pub async fn run_scheduler_task(args: &[String], pos: usize, config_manager: &config::ConfigManager) {
+// Returns: exit code (0 = success, 1 = at least one error occurred)
+pub async fn run_scheduler_task(args: &[String], pos: usize, config_manager: &config::ConfigManager) -> i32 {
     crate::utils::system::attach_console();
 
     info!(">>> [START] Network sync command detected via /scheduler <<<");
+    let mut error_count = 0;
 
     // 4.0 Cleanup legacy startup scripts (vbs) asynchronously with timeout protection
     crate::utils::system::cleanup_legacy_vbs_startup();
@@ -91,6 +93,7 @@ pub async fn run_scheduler_task(args: &[String], pos: usize, config_manager: &co
         // sync_port_proxies has internal 10-retry logic for IP fetching
         if let Err(e) = network::port_proxy::sync_port_proxies(&name, &distro_rules) {
             error!("Sync FAILED for '{}': {}", name, e);
+            error_count += 1;
         } else {
             info!("Sync SUCCESS for '{}'.", name);
         }
@@ -169,6 +172,7 @@ pub async fn run_scheduler_task(args: &[String], pos: usize, config_manager: &co
                 }
                 Err(e) => {
                     error!("FAILED to batch attach USB devices: {}", e);
+                    error_count += 1;
                 }
             }
         } else {
@@ -180,4 +184,12 @@ pub async fn run_scheduler_task(args: &[String], pos: usize, config_manager: &co
     info!(">>> [FINISH] USB boot-attach synchronization completed. <<<");
     
     info!(">>> [FINISH] All scheduled network tasks completed. <<<");
+
+    // Return exit code based on whether any errors occurred
+    if error_count > 0 {
+        error!("Scheduler task completed with {} error(s).", error_count);
+        1
+    } else {
+        0
+    }
 }

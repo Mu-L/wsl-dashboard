@@ -151,6 +151,7 @@ export component AdvancedSettingsSection inherits VerticalLayout {
     in property <[string]> log_days_options;
     in-out property <bool> auto_shutdown;
     in-out property <bool> sparse_vhd;
+    in-out property <bool> mount_auto_probe;
     
     callback select_distro_folder();
     callback select_logs_folder();
@@ -224,6 +225,25 @@ export component AdvancedSettingsSection inherits VerticalLayout {
                     }
                 }
             }
+            VerticalLayout {
+                spacing: 4px;
+                CustomCheckBox {
+                    checked <=> root.mount_auto_probe;
+                    text: root.strings.mount_auto_probe;
+                }
+                HorizontalLayout {
+                    padding-left: AppI18n.is-rtl ? 0px : 30px;
+                    padding-right: AppI18n.is-rtl ? 30px : 0px;
+                    Text {
+                        text: root.strings.mount_auto_probe_desc;
+                        font-size: 11px * LayoutConstants.font-scale;
+                        font-family: Theme.default_font;
+                        color: Theme.text_secondary;
+                        horizontal-alignment: AppI18n.is-rtl ? right : left;
+                        wrap: word-wrap;
+                    }
+                }
+            }
         }
     }
 }
@@ -235,6 +255,7 @@ export component InterfaceSettingsSection inherits VerticalLayout {
     in-out property <bool> sidebar_usb: true;
     in-out property <bool> sidebar_network: true;
     in-out property <bool> sidebar_scheduler: true;
+    in-out property <bool> sidebar_mount: true;
     in-out property <bool> sidebar_donate: true;
     in-out property <bool> sidebar_about: true;
     in-out property <bool> system_color;
@@ -265,10 +286,11 @@ export component InterfaceSettingsSection inherits VerticalLayout {
             Row {
                 CustomCheckBox { text: AppI18n.t("sidebar.network", [AppI18n.version]); checked <=> root.sidebar_network; }
                 CustomCheckBox { text: AppI18n.t("sidebar.scheduler", [AppI18n.version]); checked <=> root.sidebar_scheduler; }
+                CustomCheckBox { text: AppI18n.t("sidebar.mount", [AppI18n.version]); checked <=> root.sidebar_mount; }
                 CustomCheckBox { text: AppI18n.t("sidebar.donate", [AppI18n.version]); checked <=> root.sidebar_donate; }
-                CustomCheckBox { text: AppI18n.t("sidebar.settings", [AppI18n.version]); checked: true; enabled: false; }
             }
             Row {
+                CustomCheckBox { text: AppI18n.t("sidebar.settings", [AppI18n.version]); checked: true; enabled: false; }
                 CustomCheckBox { text: AppI18n.t("sidebar.about", [AppI18n.version]); checked <=> root.sidebar_about; }
             }
         }

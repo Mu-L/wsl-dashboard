@@ -64,6 +64,13 @@ pub fn migrate_config(config: &mut Config) {
         config.settings.show_drag = true;
     }
 
+    // v8 -> v9 logic
+    if old_version < 9 {
+        info!("Upgrading to v9: adding [sidebar] scheduler, mount (default true)");
+        config.sidebar.scheduler = true;
+        config.sidebar.mount = true;
+    }
+
     config.application.setting_version = SETTINGS_VERSION as u8;
     info!("Configuration migration complete, current version: v{}", SETTINGS_VERSION);
 }

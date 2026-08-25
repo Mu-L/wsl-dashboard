@@ -40,6 +40,7 @@ I18N : [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中�
 - [💻 Buƙatar Tsari](#-bukatar-tsari)
 - [🇵 Jagoran Shigarwa](#-jagoran-shigarwa)
 - [🛠️ Tattalin Arziki na Fasaha da Aiki](#️-tattalin-arziki-na-fasaha-da-aiki)
+- [📢 Ƙungiyoyin al'umma na hukuma](#-ƙungiyoyin-al-umma-na-hukuma)
 - [🤝 Tallafin Al'umma](#-tallafin-aluma)
 - [❤️ Tallafa wannan Shiri](#️-talla-fa-wannan-shiri)
 - [⭐️ Don Ƙauna](#️-don-kauna)
@@ -110,8 +111,10 @@ Turanci, Sinanci sauƙi, Sinanci na gargajiya, Hindi, Mutanen Espanya, Faransanc
 - **UI na zamani na asali**: GUI mai sauƙi, tare da yanayin duhu/haske, animations masu santsi, da high-performance rendering da **Skia** ke gudanarwa.
 - **Haɗin System Tray**: Cikakken tallafin tray (~10MB amfani da ƙwaƙwalwa), tare da canja nuni/ɓoye ta hanyar buga sau biyu da menu na dama cikakke.
 - **Farko mai Hankali**: Tallafin farawa ta atomatik, ƙarami zuwa tray (ta amfani da `/silent` don farawa a shirye), da rufe distro ta atomatik lokacin fita.
+- **Tsara Ayyuka**: Gudanar da tsara ayyuka mai sassauƙa, yana tallafawa aiwatar da rubutun da umarni ta atomatik a cikin mawuyayin WSL a lokaci ko tazara da aka ƙayyade don ayyukan atomatik.
 - **Sarrafawa Cikakke**: Farko, dakatarwa, tsattsauran ra'ayi, da cire rajista ta dan-fafe. Binciken halin aiki a lokaci gane, duba amfani da faifai da wuraren fayil.
 - **Sarrafa Distro**: Saita azaman tsoho, motsi na jiki (motsa VHDX zuwa wani faifai), da fitar da/kwafi azaman `.tar` ko `.tar.gz`.
+- **Hawan Faifai**: Hada da sarrafa faifan VHDX na mawuyayin WSL kai tsaye, yana tallafawa ayyuka na hawa, cire hawa, da sarrafa faifai, yana sauƙaƙe canja fayiloli tsakanin mai masauki da WSL.
 - **Haɗi Cikin Sauri**: Dan-fafe zuwa terminal, VS Code, ko mai binciken fayil, tare da tallafin buɗaɗɗen shigarwa da hanyar tafiya.
 - **Shigarwar Distro**: Shigar da rarraba Linux ta Microsoft Store, GitHub, fayilolin gida (RootFS/VHDX), ko Maduban Yanar Gizo (tare da gwajin gudu na atomatik don zaɓar mafi saurin madubi da mai taimakon sauke RootFS na ciki).
 - **Tsaro na Duniya**: Amfani da mutex don tabbatar da amincin ayyuka na motsi/ajiya a lokaci gane, da share fakitin Appx ta atomatik lokacin cirewa.
@@ -176,6 +179,18 @@ Ana rubuta fayilolin log zuwa buɗaɗɗen log, kuma ana iya haɗa su lokacin bay
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Hawan Faifai
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Tsara Ayyuka
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Nuni Aiki
@@ -266,6 +281,17 @@ Tabbatar da an shigar da kayan aikin Rust (Rust 1.92+ ko sabuwar sigar).
   - **Daukaka**: Ingantacciyar sigar tana ƙirƙirar fayil ɗin guda ɗaya.
 
 
+
+## 📢 Ƙungiyoyin al'umma na hukuma
+
+Barka da zuwa ga ƙungiyoyin al'umma na hukumar WSL UI! Shiga shafukanmu don magana kan shawarwari na amfani, cire matsaloli, samun sabbin shawarwari, da kuma haɗin da masu haɗawa da saƙoƙin wasu amfani.
+
+| Ƙungiya ta Duniya (Telegram) | Ƙungiya ta Sinanci (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Yi skan don shiga | Yi skan don shiga |
+
+---
 
 ## 🤝 Tallafin Al'umma
 

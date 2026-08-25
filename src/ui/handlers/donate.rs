@@ -67,6 +67,12 @@ pub fn trigger_fetch(app_handle: slint::Weak<AppWindow>, _app_state: Arc<tokio::
         }).await.unwrap_or_default();
 
         // 2. Only keep items where enable == 1 and format is 1, 2, or 3
+        let donation_record_url: String = resp
+            .donation_record
+            .as_ref()
+            .map(|d| d.url.clone())
+            .unwrap_or_default();
+
         let methods: Vec<_> = resp.payment_methods
             .into_iter()
             .filter(|m| m.enable == 1 && (m.format == 1 || m.format == 2 || m.format == 3 || m.format == 4))
@@ -170,6 +176,7 @@ pub fn trigger_fetch(app_handle: slint::Weak<AppWindow>, _app_state: Arc<tokio::
                         std::rc::Rc::new(slint::VecModel::from(region_images)).into()
                     );
                     app.set_donate_methods_ready(true);
+                    app.set_donate_donation_record_url(donation_record_url.into());
                     debug!("donate: payment methods UI updated");
                 }
             });

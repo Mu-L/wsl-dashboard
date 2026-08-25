@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - [💻 Sistem tələbləri](#-sistem-tələbləri)
 - [📦 Quraşdırma bələdçisi](#-quraşdırma-bələdçisi)
 - [🛠️ Texnoloji stak və performans](#️-texnoloji-stak-və-performans)
+- [📢 Rəsmi icma qrupları](#-rəsmi-icma-qrupları)
 - [🤝 İcmal dəstəyi](#-icmal-dəstəyi)
 - [❤️ Bu layihəni dəstəkləyin](#️-bu-layihəni-dəstəkləyin)
 - [⭐️ Sevgi ilə çalışan layihə](#️-sevgi-ile-çalışan-layihə)
@@ -109,8 +110,10 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - **Müasir nativ UI**: **Skia** ilə yüksək performanslı renderləmə, qaranlıq/işıqlı rejim, hamar animasiyalar ilə intuitiv GUI.
 - **Sistem trey inteqrasiyası**: Tam trey dəstəyi (~10MB yaddaş istifadəsi), cüt klik ilə göstər/gizlə dəyişdirmə və tam funksional sağ klik menyusu.
 - **Ağıllı başlanğıc**: Avtomatik başlanğıc, treyə minimizasiya (`/silent` arqumenti ilə səssiz işə salma), çıxışda avtomatik bağlama.
+- **Tapşırıqların planlaşdırılması**: Çevik tapşırıqların planlaşdırılması idarəetməsi, avtomatlaşdırılmış əməliyyatlar üçün WSL instanslarında müəyyən edilmiş vaxtda və ya intervalda skript və əmrlərin avtomatik icrasını dəstəkləyir.
 - **Tam instans nəzarəti**: Bir kliklə başlat, dayandır, sonlandır və qeydiyyatdan sil. Canlı vəziyyət monitorinqi, disk istifadəsi və fayl yerləri haqqında ətraflı məlumat.
 - **Dağıtım idarəetməsi**: Defolt olaraq təyin et, fiziki miqrasiya (VHDX digər diskə köçürmə), `.tar` və ya `.tar.gz` arxivi kimi ixrac/klonlama.
+- **Disk bağlama**: WSL instansı VHDX virtual disklərini birbaşa bağlamaq və idarə etmək, mount, unmount və disk idarəetmə əməliyyatlarını dəstəkləyir, host və WSL arasında fayl ötürülməsini asanlaşdırır.
 - **Sürətli inteqrasiya**: Terminal, VS Code və ya fayl araşdırıcısına bir kliklə giriş, fərdi işçi kataloq və skript qarmaqları dəstəyi.
 - **Distribusiya quraşdırması**: Microsoft Store, GitHub, lokal fayllar (RootFS/VHDX) və ya onlayn güzgülər vasitəsilə Linux distribusiyalarını quraşdırın (ən sürətli güzgünü seçmək üçün avtomatik sürət testi və daxili RootFS yükləmə köməkçisi ilə).
 - **Qlobal təhlükəsizlik**: Eyni vaxtda miqrasiya/yedəkləmə əməliyyatlarının təhlükəsizliyi üçün mutex kilidləri, silinərkən Appx paketlərinin avtomatik təmizlənməsi.
@@ -175,6 +178,18 @@ Loq faylları konfiqurasiya edilmiş loq kataloqunda yazılır, problemlər bild
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Disk bağlama
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Tapşırıqların planlaşdırılması
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Əməliyyat demosu
@@ -264,6 +279,18 @@ Rust alət zəncirinin (Rust 1.92+ və ya ən son versiya) quraşdırıldığın
   - **Resurs səmərəliliyi**: Çox aşağı resurs istifadəsi (ətraflı məlumat üçün [Əsas xüsusiyyətlər](#-əsas-xüsusiyyətlər-və-istifadə) bölməsinə baxın).
   - **Daşınabilirlik**: Optimizasiya edilmiş buraxılış versiyası kompakt icra olunan fayl yaradır.
 
+
+
+## 📢 Rəsmi icma qrupları
+
+WSL UI rəsmi icma qruplarına xoş gəldiniz! İstifadə məsləhətlərini müzakirə etmək, problemləri bildirilmək, son yeniləmələri almaq və tərtibatçılar ilə digər istifadəçilərlə əlaqə qurmaq üçün kanallarımıza qoşulun.
+
+| Qlobal Qrup (Telegram) | Çin Qrupu (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Qoşulmaq üçün skaner edin | Qoşulmaq üçün skaner edin |
+
+---
 
 
 ## 🤝 İcmal dəstəyi

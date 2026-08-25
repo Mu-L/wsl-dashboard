@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - [💻 Requisiti di Sistema](#-requisiti-di-sistema)
 - [📦 Guida all'Installazione](#-guida-allinstallazione)
 - [🛠️ Stack Tecnologico e Performance](#️-stack-tecnologico-e-performance)
+- [📢 Gruppi Ufficiali della Community](#-gruppi-ufficiali-della-community)
 - [🤝 Supporto della Comunità](#-supporto-della-comunità)
 - [❤️ Sostenere questo progetto](#️-sostenere-questo-progetto)
 - [⭐️ Lavoro fatto con amore](#️-lavoro-fatto-con-amore)
@@ -110,8 +111,10 @@ Inglese, Cinese (Semplificato), Cinese (Tradizionale), Hindi, Spagnolo, Francese
 - **Interfaccia Nativa Moderna**: GUI intuitiva con supporto alla modalità chiara/scura, animazioni fluide e rendering ad alte prestazioni basato su **Skia**.
 - **Integrazione System Tray**: Supporto completo per la riduzione nell'area di notifica (~10MB di RAM), doppio clic per mostrare/nascondere e menu contestuale funzionale.
 - **Avvio Intelligente**: Configura la dashboard per avviarsi con Windows, ridursi nel tray (modalità silenziosa con `/silent`) e arrestare automaticamente le distribuzioni alla chiusura.
+- **Pianificazione attività**: Gestione flessibile della pianificazione delle attività, che supporta l'esecuzione automatica di script e comandi nelle istanze WSL in orari o intervalli specificati per operazioni automatizzate.
 - **Controllo Completo Istanze**: Avvio, stop, terminazione e rimozione in un clic. Monitoraggio dello stato in tempo reale e approfondimenti su utilizzo del disco e posizione dei file.
 - **Gestione Distribuzioni**: Imposta come predefinita, migrazione (sposta il VHDX su altre unità) ed esportazione/clonazione in formato `.tar` o `.tar.gz`.
+- **Montaggio disco**: Monta e gestisci direttamente i dischi virtuali VHDX delle istanze WSL, supportando operazioni di montaggio, smontaggio e gestione del disco, facilitando il trasferimento di file tra host e WSL.
 - **Integrazione Rapida**: Lancio istantaneo di Terminale, VS Code o Esplora File con directory di lavoro personalizzabili e hook per script di avvio.
 - **Installazione Distribuzione**: Installa distribuzioni Linux tramite Microsoft Store, GitHub, file locali (RootFS/VHDX) o mirror online (con test di velocità automatico per scegliere il mirror più veloce e assistente al download RootFS integrato).
 - **Sicurezza Globale**: Blocchi mutex per operazioni di migrazione/backup simultanee sicure e pulizia automatica di Appx alla rimozione.
@@ -176,6 +179,18 @@ I file di log vengono scritti nella directory configurata e possono essere alleg
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Montaggio disco
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Pianificazione attività
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Demo di Funzionamento
@@ -265,6 +280,18 @@ Assicurati di avere installato la toolchain Rust (Rust 1.92+ o successivo).
   - **Efficienza**: Utilizzo risorse bassissimo (dettagli in [Funzionalità Principali](#-funzionalità-principali-e-uso)).
   - **Portabilità**: La build ottimizzata produce un unico eseguibile compatto.
 
+
+
+## 📢 Gruppi Ufficiali della Community
+
+Benvenuti nei gruppi ufficiali della community WSL UI! Unisciti ai nostri canali per discutere consigli d'uso, segnalare problemi, ottenere gli ultimi aggiornamenti e connetterti con gli sviluppatori e altri utenti.
+
+| Gruppo Globale (Telegram) | Gruppo Cinese (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Scansiona per unirti | Scansiona per unirti |
+
+---
 
 
 ## 🤝 Supporto della Comunità

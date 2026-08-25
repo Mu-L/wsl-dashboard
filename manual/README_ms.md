@@ -40,6 +40,7 @@ I18N : [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中�
 - [💻 Keperluan Sistem](#-keperluan-sistem)
 - [📦 Panduan Pemasangan](#-panduan-pemasangan)
 - [🛠️ Teknologi & Prestasi](#️-teknologi--prestasi)
+- [📢 Kumpulan Komuniti Rasmi](#-kumpulan-komuniti-rasmi)
 - [🤝 Sokongan Komuniti](#-sokongan-komuniti)
 - [❤️ Sokong Projek Ini](#️-sokong-projek-ini)
 - [⭐️ Sokongan Ikhlas](#️-sokongan-ikhlas)
@@ -110,8 +111,10 @@ Bahasa Inggeris, Bahasa Cina Ringkas, Bahasa Cina Tradisional, Bahasa Hindi, Bah
 - **Antaramuka Natif Moden**: GUI intuitif dengan sokongan mod gelap/terang, animasi lancar dan rendering berprestasi tinggi yang dikuasakan oleh **Skia**.
 - **Integrasi Dulang Sistem**: Sokongan dulang penuh (~10MB penggunaan memori), dwi-klik untuk tunjuk/sembunyi dan menu klik kanan yang berfungsi sepenuhnya.
 - **Permulaan Pintar**: Sokongan auto-mula, minimasi ke dulang (permulaan senyap dengan parameter `/silent`) dan penutupan automatik distro semasa keluar.
+- **Penjadualan Tugas**: Pengurusan penjadualan tugas yang fleksibel, menyokong pelaksanaan automatik skrip dan arahan dalam instans WSL pada masa atau selang tertentu untuk operasi automatik.
 - **Kawalan Instans Menyeluruh**: Mula, hentikan, paksa henti dan nyahdaftar dengan satu klik. Pemantauan status masa nyata, butiran penggunaan cakera dan lokasi fail.
 - **Pengurusan Distro**: Tetapkan sebagai lalai, migrasi fizikal (pindah VHDX ke cakera lain) dan eksport/klon sebagai `.tar` atau `.tar.gz`.
+- **Pemasangan Cakera**: Lekap dan uruskan cakera maya VHDX instans WSL secara langsung, menyokong operasi lekap, nyahlekap dan pengurusan cakera, memudahkan pemindahan fail antara hos dan WSL.
 - **Integrasi Pantas**: Buka terminal, VS Code atau pengurus fail dengan satu klik, sokong direktori kerja tersuai dan skrip cangkuk pelancaran.
 - **Pemasangan Distro**: Pasang distribusi Linux melalui Microsoft Store, GitHub, fail tempatan (RootFS/VHDX) atau cermin dalam talian (dengan ujian kelajuan automatik untuk memilih cermin terpantas dan alat bantu muat turun RootFS terbina dalam).
 - **Keselamatan Global**: Mutex untuk keselamatan operasi migrasi/backup serentak dan pembersihan pakej Appx automatik semasa pembuangan.
@@ -176,6 +179,18 @@ Fail log ditulis ke direktori log yang dikonfigurasikan dan boleh dilampirkan se
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Pemasangan Cakera
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Penjadualan Tugas
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Demo Operasi
@@ -266,6 +281,17 @@ Pastikan anda telah memasang Rust toolchain (Rust 1.92+ atau lebih baharu).
   - **Kemudahalihan**: Versi keluaran yang dioptimumkan menghasilkan satu fail boleh laku yang padat.
 
 
+
+## 📢 Kumpulan Komuniti Rasmi
+
+Selamat datang ke kumpulan komuniti WSL UI rasmi! Sertai saluran kami untuk membincangkan tip penggunaan, melaporkan isu, mendapatkan terkini update dan berhubung dengan pembangun serta pengguna lain.
+
+| Kumpulan Global (Telegram) | Kumpulan China (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Imbas untuk menyertai | Imbas untuk menyertai |
+
+---
 
 ## 🤝 Sokongan Komuniti
 

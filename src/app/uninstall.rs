@@ -163,6 +163,23 @@ try {
 
     // Note: schtasks /Delete cannot remove a folder that still contains tasks.
     // The PowerShell script above unregisters all tasks and then removes the folder.
+
+    // Delete the task_scheduler.ps1 script file (always delete regardless of CleanupData setting)
+    let script_path = scheduler::get_script_path();
+    if script_path.exists() {
+        info!("Deleting task scheduler script: {:?}", script_path);
+        if let Err(e) = fs::remove_file(&script_path) {
+            warn!("Failed to delete task scheduler script: {}", e);
+        } else {
+            info!("Task scheduler script deleted successfully.");
+            // Try to remove the scripts directory if it's now empty
+            if let Some(parent) = script_path.parent() {
+                let _ = fs::remove_dir(parent);
+            }
+        }
+    } else {
+        info!("Task scheduler script not found at {:?}, skipping deletion.", script_path);
+    }
 }
 
 async fn cleanup_registry_autostart() {

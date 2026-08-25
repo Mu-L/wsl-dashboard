@@ -1,0 +1,380 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 owu <wqh@live.com>
+// SPDX-License-Identifier: GPL-3.0-only
+
+import { Theme, AppI18n, LayoutConstants, PhysicalDiskInfo } from "../../theme.slint";
+import { CustomLineEdit, CustomComboBox, CustomRadioButton, CustomCheckBox, CustomButton } from "../form_widgets.slint";
+
+export component MountDiskDialog inherits Rectangle {
+    in-out property <bool> open: false;
+    in-out property <int> active_tab: 0; // 0: VHD, 1: Physical
+
+    in property <[PhysicalDiskInfo]> physical_disks: [];
+    in property <[string]> physical_disk_texts: [];
+    in-out property <int> selected_disk_index: 0;
+    in-out property <string> vhd_path: "";
+    in-out property <bool> bare_mount: false;
+    in-out property <string> custom_name: "";
+    in-out property <string> partition: "";
+    in-out property <string> filesystem: "";
+    in-out property <string> mount_options: "";
+    in property <string> mount_help_url: "";
+
+    callback close();
+    callback browse_vhd();
+    callback confirm_mount();
+    callback open_mount_help_url();
+
+    visible: open;
+    width: 100%;
+    height: 100%;
+
+    // Semi-transparent overlay
+    Rectangle {
+        width: 100%;
+        height: 100%;
+        background: #00000080;
+    }
+
+    // Modal Box
+    Rectangle {
+        width: 500px;
+        height: 350px;
+        background: Theme.card_bg;
+        border-radius: 8px;
+        border-width: 1px;
+        border-color: Theme.border_color;
+        drop-shadow-blur: 16px;
+        drop-shadow-color: #0000004d;
+
+        VerticalLayout {
+            padding: 20px;
+            spacing: 12px;
+
+            // Dialog Header
+            HorizontalLayout {
+                alignment: space-between;
+                Text {
+                    text: AppI18n.t("mount_disk.dialog_title", [AppI18n.version]);
+                    font-size: 18px * LayoutConstants.font-scale;
+                    font-weight: 700;
+                    font-family: Theme.default_font;
+                    color: Theme.text_primary;
+                    vertical-alignment: center;
+                }
+
+                Rectangle {
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 4px;
+                    background: close_touch.has-hover ? Theme.hover_bg : transparent;
+
+                    Text {
+                        text: "\u{E711}"; // Close icon
+                        font-family: Theme.icon_font;
+                        font-size: 14px;
+                        color: Theme.text_secondary;
+                        horizontal-alignment: center;
+                        vertical-alignment: center;
+                    }
+
+                    close_touch := TouchArea {
+                        clicked => { root.close(); }
+                    }
+                }
+            }
+
+            // Divider
+            Rectangle {
+                height: 1px;
+                background: Theme.border_color;
+            }
+
+            // Tab Buttons (Physical / VHD)
+            HorizontalLayout {
+                spacing: 20px;
+                alignment: start;
+                CustomRadioButton {
+                    text: AppI18n.t("mount_disk.tab_vhd", [AppI18n.version]);
+                    checked: root.active_tab == 0;
+                    clicked => { root.active_tab = 0; }
+                }
+                CustomRadioButton {
+                    text: AppI18n.t("mount_disk.tab_physical", [AppI18n.version]);
+                    checked: root.active_tab == 1;
+                    clicked => { root.active_tab = 1; }
+                }
+            }
+
+            // Tab 0: VHD Form
+            if (root.active_tab == 0): VerticalLayout {
+                spacing: 4px;
+
+                HorizontalLayout {
+                    spacing: 8px;
+                    CustomLineEdit {
+                        horizontal-stretch: 1;
+                        text <=> root.vhd_path;
+                        placeholder-text: "D:\\linux\\my_disk.vhdx";
+                    }
+                    CustomButton {
+                        text: AppI18n.t("mount_disk.browse", [AppI18n.version]);
+                        clicked => { root.browse_vhd(); }
+                    }
+                }
+
+                VerticalLayout {
+                    padding-top: 4px;
+                    padding-bottom: 4px;
+                    CustomCheckBox {
+                        text: AppI18n.t("mount_disk.bare_mode", [AppI18n.version]);
+                        checked <=> root.bare_mount;
+                    }
+                }
+
+                if (!root.bare_mount): VerticalLayout {
+                    spacing: 8px;
+
+                    GridLayout {
+                        spacing: 10px;
+                        Row {
+                            VerticalLayout {
+                                horizontal-stretch: 1; preferred-width: 0; min-width: 0;
+                                spacing: 2px;
+                                Text {
+                                    text: AppI18n.t("mount_disk.custom_name", [AppI18n.version]) + " *";
+                                    font-size: 12px * LayoutConstants.font-scale;
+                                    font-family: Theme.default_font;
+                                    color: Theme.text_secondary;
+                                    height: 14px;
+                                    vertical-alignment: bottom;
+                                }
+                                CustomLineEdit {
+                                    text <=> root.custom_name;
+                                    placeholder-text: "e.g. vhd_data";
+                                }
+                            }
+
+                            VerticalLayout {
+                                horizontal-stretch: 1; preferred-width: 0; min-width: 0;
+                                spacing: 2px;
+                                Text {
+                                    text: AppI18n.t("mount_disk.partition", [AppI18n.version]);
+                                    font-size: 12px * LayoutConstants.font-scale;
+                                    font-family: Theme.default_font;
+                                    color: Theme.text_secondary;
+                                    height: 14px;
+                                    vertical-alignment: bottom;
+                                }
+                                CustomLineEdit {
+                                    text <=> root.partition;
+                                    placeholder-text: "";
+                                }
+                            }
+                        }
+
+                        Row {
+                            VerticalLayout {
+                                horizontal-stretch: 1; preferred-width: 0; min-width: 0;
+                                spacing: 2px;
+                                Text {
+                                    text: AppI18n.t("mount_disk.filesystem_type", [AppI18n.version]);
+                                    font-size: 12px * LayoutConstants.font-scale;
+                                    font-family: Theme.default_font;
+                                    color: Theme.text_secondary;
+                                    height: 14px;
+                                    vertical-alignment: bottom;
+                                }
+                                CustomLineEdit {
+                                    text <=> root.filesystem;
+                                    placeholder-text: "ext4";
+                                }
+                            }
+
+                            VerticalLayout {
+                                horizontal-stretch: 1; preferred-width: 0; min-width: 0;
+                                spacing: 2px;
+                                Text {
+                                    text: AppI18n.t("mount_disk.mount_options", [AppI18n.version]);
+                                    font-size: 12px * LayoutConstants.font-scale;
+                                    font-family: Theme.default_font;
+                                    color: Theme.text_secondary;
+                                    height: 14px;
+                                    vertical-alignment: bottom;
+                                }
+                                CustomLineEdit {
+                                    text <=> root.mount_options;
+                                    placeholder-text: "ro";
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Rectangle { vertical-stretch: 1; }
+            }
+
+            // Tab 1: Physical Disk Form
+            if (root.active_tab == 1): VerticalLayout {
+                spacing: 4px;
+
+                if (root.physical_disk_texts.length > 0): CustomComboBox {
+                    model: root.physical_disk_texts;
+                    current-index <=> root.selected_disk_index;
+                }
+
+                if (root.physical_disk_texts.length == 0): Rectangle {
+                    background: #f59e0b26;
+                    border-radius: 4px;
+                    border-width: 1px;
+                    border-color: #f59e0b;
+                    height: 32px;
+                    HorizontalLayout {
+                        padding-left: 8px;
+                        padding-right: 4px;
+                        spacing: 4px;
+                        alignment: start;
+                        Text {
+                            text: AppI18n.t("mount_disk.no_disks_found", [AppI18n.version]);
+                            font-size: 13px * LayoutConstants.font-scale;
+                            font-family: Theme.default_font;
+                            color: #d97706;
+                            vertical-alignment: center;
+                            horizontal-stretch: 1;
+                            overflow: elide;
+                        }
+                        VerticalLayout {
+                            alignment: center;
+                            width: 18px;
+                            Rectangle {
+                                width: 18px;
+                                height: 18px;
+                                border-radius: 9px;
+                                background: (root.mount_help_url != "" && ta-help.has-hover) ? #0078D420 : transparent;
+                                Text {
+                                    text: "?";
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    font-family: Theme.default_font;
+                                    color: root.mount_help_url != "" ? #0078D4 : Theme.text_secondary;
+                                    vertical-alignment: center;
+                                    horizontal-alignment: center;
+                                }
+                                ta-help := TouchArea {
+                                    mouse-cursor: root.mount_help_url != "" ? pointer : default;
+                                    clicked => {
+                                        if (root.mount_help_url != "") {
+                                            root.open_mount_help_url();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                VerticalLayout {
+                    padding-top: 4px;
+                    padding-bottom: 4px;
+                    CustomCheckBox {
+                        text: AppI18n.t("mount_disk.bare_mode", [AppI18n.version]);
+                        checked <=> root.bare_mount;
+                    }
+                }
+
+                if (!root.bare_mount): VerticalLayout {
+                    spacing: 8px;
+
+                    GridLayout {
+                        spacing: 10px;
+                        Row {
+                            VerticalLayout {
+                                horizontal-stretch: 1; preferred-width: 0; min-width: 0;
+                                spacing: 2px;
+                                Text {
+                                    text: AppI18n.t("mount_disk.custom_name", [AppI18n.version]) + " *";
+                                    font-size: 12px * LayoutConstants.font-scale;
+                                    font-family: Theme.default_font;
+                                    color: Theme.text_secondary;
+                                    height: 14px;
+                                    vertical-alignment: bottom;
+                                }
+                                CustomLineEdit {
+                                    text <=> root.custom_name;
+                                    placeholder-text: "e.g. disk_data";
+                                }
+                            }
+
+                            VerticalLayout {
+                                horizontal-stretch: 1; preferred-width: 0; min-width: 0;
+                                spacing: 2px;
+                                Text {
+                                    text: AppI18n.t("mount_disk.partition", [AppI18n.version]);
+                                    font-size: 12px * LayoutConstants.font-scale;
+                                    font-family: Theme.default_font;
+                                    color: Theme.text_secondary;
+                                    height: 14px;
+                                    vertical-alignment: bottom;
+                                }
+                                CustomLineEdit {
+                                    text <=> root.partition;
+                                    placeholder-text: "";
+                                }
+                            }
+                        }
+
+                        Row {
+                            VerticalLayout {
+                                horizontal-stretch: 1; preferred-width: 0; min-width: 0;
+                                spacing: 2px;
+                                Text {
+                                    text: AppI18n.t("mount_disk.filesystem_type", [AppI18n.version]);
+                                    font-size: 12px * LayoutConstants.font-scale;
+                                    font-family: Theme.default_font;
+                                    color: Theme.text_secondary;
+                                    height: 14px;
+                                    vertical-alignment: bottom;
+                                }
+                                CustomLineEdit {
+                                    text <=> root.filesystem;
+                                    placeholder-text: "ext4";
+                                }
+                            }
+
+                            VerticalLayout {
+                                horizontal-stretch: 1; preferred-width: 0; min-width: 0;
+                                spacing: 2px;
+                                Text {
+                                    text: AppI18n.t("mount_disk.mount_options", [AppI18n.version]);
+                                    font-size: 12px * LayoutConstants.font-scale;
+                                    font-family: Theme.default_font;
+                                    color: Theme.text_secondary;
+                                    height: 14px;
+                                    vertical-alignment: bottom;
+                                }
+                                CustomLineEdit {
+                                    text <=> root.mount_options;
+                                    placeholder-text: "ro,noatime";
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Rectangle { vertical-stretch: 1; }
+            }
+
+            // Action Buttons Footer
+            HorizontalLayout {
+                alignment: end;
+                spacing: 12px;
+
+                CustomButton {
+                    text: AppI18n.t("mount_disk.mount", [AppI18n.version]);
+                    primary: true;
+                    show_shield: root.active_tab == 1; // Physical disk needs administrator elevation
+                    clicked => { root.confirm_mount(); }
+                }
+            }
+        }
+    }
+}

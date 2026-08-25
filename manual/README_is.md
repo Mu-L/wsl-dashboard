@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - [💻 Kerfiskröfur](#-kerfiskröfur)
 - [📦 Uppsetningarleiðbeiningar](#-uppsetningarleiðbeiningar)
 - [🛠️ Tæknistafla og afköst](#️-tæknistafla-og-afköst)
+- [📢 Opinber samfélags hópar](#-opinber-samfélags-hópar)
 - [🤝 Samfélagsstuðningur](#-samfélagsstuðningur)
 - [❤️ Styðja þetta verkefni](#️-styðja-þetta-verkefni)
 - [⭐️ Gert af ást](#️-gert-af-ást)
@@ -110,8 +111,10 @@ Enska, einfölduð kínverska, hefðbundin kínverska, hindí, spænska, franska
 - **Nútímalegt viðmót**: Innsæi GUI með stuðningi fyrir dökka og ljósa stillingu, mjúkar hreyfingar og afkastamikil teiknun knúin af **Skia**.
 - **Samþætting við kerfisbakka (Tray)**: Fullur stuðningur við að fela forritið í kerfisbakkanum (~10MB vinnsluminni í notkun), tvísmella til að sýna/fela og hagnýtur hægri-smellismatseðill.
 - **Snjöll ræsistýring**: Stilla stjórnborðið til að ræsast með Windows, lágmarkast í bakka (hljóðlaus ræsing með `/silent`) og slökkva sjálfkrafa á Linux-kerfum við lokun.
+- **Verkefnaáætlun**: Sveigjanleg stjórnun verkefnaáætlunar, styður sjálfvirka framkvæmd skripta og skipana í WSL tilvikum á ákveðnum tíma eða með reglubundnu millibili fyrir sjálfvirkar aðgerðir.
 - **Víðtæk tilvikastýring**: Ræsa, stöðva, loka og afskrá með einum smelli. Rauntímavöktun á stöðu og nákvæmar upplýsingar um disknotkun og staðsetningu skráa.
 - **Umsjón með kerfum**: Setja sem sjálfgefið, flutningur (færa VHDX á aðra drif) og útflutningur/afritun á `.tar` eða `.tar.gz` sniði.
+- **Diskatenging**: Tengdu og stjórnaðu VHDX sýndardiskum WSL tilvika beint, styður tengingu, aftengingu og diskastjórnun, auðveldar skráaflutning milli hýsil og WSL.
 - **Hröð samþætting**: Ræsa beint í Terminal, VS Code eða skráakönnuð með sérsniðnum vinnuefnum og ræsiforritaskriftum.
 - **Uppsetning dreifingar**: Settu upp Linux dreifingar í gegnum Microsoft Store, GitHub, staðbundnar skrár (RootFS/VHDX) eða netspeglar (með sjálfvirkri hraðaprófun til að velja hraðasta spegilinn og innbyggðu RootFS niðurhalshjálpartæki).
 - **Alþjóðlegt öryggi**: Mutex-lásar fyrir örugga samtímaflutninga/afritun og sjálfvirk Appx-hreinsun við eyðingu.
@@ -177,6 +180,18 @@ Annálaskrár eru skrifaðar í stillta möppu og má láta þær fylgja með þ
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Diskatenging
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Verkefnaáætlun
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Sýnikennsla
@@ -266,6 +281,18 @@ Gakktu úr skugga um að þú hafir Rust tækjapakkann (Rust 1.92+ eða nýrri) 
   - **Skilvirkni**: Einstaklega lítil auðlindanotkun (sjá [Helstu eiginleikar](#-helstu-eiginleikar-og-notkun) fyrir nánari upplýsingar).
   - **Sveigjanleiki**: Fínstillt útgáfusmíð skilar einni þéttri keyrsluskrá.
 
+
+
+## 📢 Opinber samfélags hópar
+
+Velkominn að heita í opinberu samfélags hópunum WSL UI! Aðgangi til að umræða ábendingar, tilkynna vandamál, fá uppfærslur og tengjast þróunaraðilum og öðrum notendum.
+
+| Alþjóðlegur hópur (Telegram) | Kínverskur hópur (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Skanna til að ganga í | Skanna til að ganga í |
+
+---
 
 
 ## 🤝 Samfélagsstuðningur

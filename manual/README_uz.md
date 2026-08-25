@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - [💻 Sistema talablari](#-sistema-talablari)
 - [📦 O'rnatish bo'yicha qo'llanma](#-o'rnatish-bo'yicha-qo'llanma)
 - [🛠️ Texnologik stak va samaradorlik](#️-texnologik-stak-va-samaradorlik)
+- [📢 Rasmiy jamoa guruhlari](#-rasmiy-jamoa-guruhlari)
 - [🤝 Jamiyat qo'llab-quvvatlash](#-jamiyat-qo'llab-quvvatlash)
 - [❤️ Loyihani qo'llab-quvvatlang](#️-loyihani-qo'llab-quvvatlang)
 - [⭐️ Sevgi bilan ishlaydigan loyiha](#️-sevgi-bilan-ishlaydigan-loyiha)
@@ -111,8 +112,10 @@ Ingliz, Sadalashtirilgan Xitoy, An'anaviy Xitoy, Hindi, Ispan, Fransuz, Arab, Be
 - **Zamonaviy UI dizayni** - Slint 6.x asosida qurilgan, silliq animatsiyalar va yuqori tezlik
 - **Past xotira iste'moli** - Minimal xotira bilan ishlaydi
 - **WMI integratsiyasi** - Windows Management Instrumentation orqali WSL instansiyalarini boshqarish
+- **Vazifalarni rejalashtirish** - Moslashuvchan vazifalarni rejalashtirish boshqaruvi, avtomatlashtirilgan operatsiyalar uchun WSL instansiyalarida belgilangan vaqtda yoki oraliqlarda skript va buyruqlarni avtomatik bajarishni qo'llab-quvvatlaydi
 - **Ko'p tilli qo'llab-quvvatlash** - 51 til qo'llab-quvvatlanadi
 - **Real vaqt monitoringi** - WSL instansiyalarining holatini real vaqtda kuzatish
+- **Diskni ulash** - WSL instansiyasi VHDX virtual disklarini to'g'ridan-to'g'ri ulash va boshqarish, mount, unmount va disk boshqaruvi operatsiyalarini qo'llab-quvvatlaydi, host va WSL o'rtasida fayllarni uzatishni osonlashtiradi
 
 ### Asosiy funksiyalar
 
@@ -170,9 +173,20 @@ level = "info"  # debug, info, warn, error
 </p>
 
 ### Til tanlash
-
 <p align="center">
   <img src="../docs/screenshots/language_selector.png" width="800" alt="Lav tanlash" />
+</p>
+
+### Diskni ulash
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Vazifalarni rejalashtirish
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ---
@@ -278,40 +292,27 @@ cargo run --release
 
 ## 🛠️ Texnologik stak va samaradorlik
 
-### Asosiy texnologiyalar
-
-| Texnologiya | Versiya | Maqsad |
-|-------------|---------|--------|
-| Rust | 1.92+ | Asosiy til |
-| Slint | 6.x | UI framework |
-| Tokio | 1.x | Asinxron runtime |
-| Serde | 1.x | Serializatsiya |
-| Windows-rs | 0.x | Windows API |
-
-### Samaradorlik ko'rsatkichlari
-
-| Ko'rsatkich | Qiymat |
-|-------------|--------|
-| Xotira iste'moli | ~50 MB |
-| Ishga tushish vaqti | ~2 soniya |
-| CPU iste'moli | Minimal (kutish holatida ~0%) |
-| Disk joylashuvi | ~30 MB |
-
-### Arxitektura
-
-```
-┌─────────────────────────────────────┐
-│           Slint UI Layer            │
-├─────────────────────────────────────┤
-│         Application Logic           │
-├─────────────────────────────────────┤
-│      WSL Management Layer           │
-├─────────────────────────────────────┤
-│       Windows API Layer             │
-└─────────────────────────────────────┘
-```
+- **Yadro**: Xotira xavfsizligi va nol xarajatli abstraksiyalar uchun Rust'da amalga oshirilgan.
+- **UI ramkasi**: Yuqori samarali **Skia** renderlov backendi bilan Slint.
+- **Asinxron runtime**: Tizim buyruqlari va I/O uchun bloklamaydigan Tokio.
+- **Samaradorlik ko'rsatkichlari**:
+  - **Tezkor javob berish**: Deyarli darhol ishga tushish va WSL holatini real vaqtda monitoring qilish.
+  - **Samaradorlik**: Ultra-past resurs sarfi (tafsilotlar uchun [Asosiy xususiyatlar](#-asosiy-xususiyatlar-va-foydalanish) ni ko'ring).
+  - **Ko'chma qulaylik**: Optimallashtirilgan release build bitta ixcham ijro etiladigan fayl hosil qiladi.
 
 ---
+
+## 📢 Rasmiy jamoa guruhlari
+
+WSL UI rasmiy jamoa guruhlari ga xush kelibsiz! Foydalanish maslahatlarini muhokama qilish, muammolarni xabar qilish, so'nggi yangiliklarni olish va dasturchilar bilan boshqa foydalanuvchilar bilan bog'lanish uchun kanallarimizga qo'shiling.
+
+| Global Guruh (Telegram) | Xitoy Guruh (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Qo'shilish uchun skanerlang | Qo'shilish uchun skanerlang |
+
+---
+
 
 ## 🤝 Jamiyat qo'llab-quvvatlash
 

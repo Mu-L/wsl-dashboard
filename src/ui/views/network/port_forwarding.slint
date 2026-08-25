@@ -70,6 +70,14 @@ export component PortForwardingView inherits Rectangle {
                             spacing: 12px;
                             padding: 40px;
                             Text {
+                                text: "\u{EE77}";
+                                font-family: Theme.icon_font;
+                                color: Theme.accent;
+                                font-size: 32px;
+                                horizontal-alignment: center;
+                                opacity: 0.3;
+                            }
+                            Text {
                                 text: AppI18n.t("network.no_rules", [AppI18n.version]);
                                 horizontal-alignment: center;
                                 color: Theme.text_secondary;

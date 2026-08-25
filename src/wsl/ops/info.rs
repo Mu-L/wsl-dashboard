@@ -27,6 +27,35 @@ pub async fn list_available_distros(executor: &WslCommandExecutor) -> WslCommand
     executor.execute_command(&["-l", "-o"]).await
 }
 
+// Get the list of running WSL distros (cross-locale safe).
+// Uses `wsl -l -q --running` instead of `wsl -l -v` to avoid locale-dependent output.
+pub async fn list_running_distros(executor: &WslCommandExecutor) -> Vec<String> {
+    let result = executor.execute_command(&["-l", "-q", "--running"]).await;
+    if result.success {
+        result.output
+            .lines()
+            .map(|l| l.trim().to_string())
+            .filter(|l| !l.is_empty())
+            .collect()
+    } else {
+        Vec::new()
+    }
+}
+
+// Get the default WSL distro name (cross-locale safe).
+// The default distro is always listed first by `wsl -l -q`.
+pub async fn get_default_distro_name(executor: &WslCommandExecutor) -> Option<String> {
+    let result = executor.execute_command(&["-l", "-q"]).await;
+    if result.success {
+        result.output
+            .lines()
+            .map(|l| l.trim().to_string())
+            .find(|l| !l.is_empty())
+    } else {
+        None
+    }
+}
+
 pub async fn detect_fastest_source(_executor: &WslCommandExecutor) -> bool {
     info!("Probing network connection to {}", crate::app::GITHUB_DOMAIN);
 

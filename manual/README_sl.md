@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - [💻 Sistemske zahteve](#-sistemske-zahteve)
 - [📦 Vodnik za namestitev](#-vodnik-za-namestitev)
 - [🛠️ Tehnologije in zmogljivost](#️-tehnologije-in-zmogljivost)
+- [📢 Uradne skupine skupnosti](#-uradne-skupine-skupnosti)
 - [🤝 Podpora skupnosti](#-podpora-skupnosti)
 - [❤️ Podprite ta projekt](#️-podprite-ta-projekt)
 - [⭐️ Delo iz ljubezni](#️-delo-iz-ljubezni)
@@ -110,8 +111,10 @@ Angleščina, poenostavljena kitajščina, tradicionalna kitajščina, hindijš�
 - **Sodoben izvorni uporabniški vmesnik**: Intuitiven GUI s podporo za temni/svetli način, gladkimi animacijami in visoko zmogljivim upodabljanjem, ki ga poganja **Skia**.
 - **Integracija v sistemsko vrstico (Tray)**: Popolna podpora za zmanjšanje v sistemsko vrstico (poraba RAM-a ~10 MB), dvojni klik za preklop in funkcionalen meni na desni klik.
 - **Inteligentni zagon**: Konfigurirajte nadzorno ploščo za zagon z Windows, zmanjšanje v sistemsko vrstico (tihi način s parametrom `/silent`) in samodejni izklop distribucij ob izhodu.
+- **Načrtovanje opravil**: Prožno upravljanje načrtovanja opravil, ki podpira samodejno izvajanje skript in ukazov v instancah WSL ob določenih časih ali intervalih za avtomatizirane operacije.
 - **Celovit nadzor instanc**: Zagon, ustavitev, prekinitev in preklic registracije z enim klikom. Spremljanje stanja v realnem času in podrobni vpogledi v porabo diska in lokacije datotek.
 - **Upravljanje distribucij**: Nastavitev kot privzeto, migracija (premik VHDX na druge pogone) in izvoz/kloniranje v `.tar` ali `.tar.gz` arhive.
+- **Pripneta diska**: Neposredno pripenjanje in upravljanje VHDX navideznih diskov instanc WSL, podpora pripenjanju, odpenjanju in operacijam upravljanja diska, kar olajša prenos datotek med gostiteljem in WSL.
 - **Hitra integracija**: Takojšen zagon v Terminal, VS Code ali Raziskovalec s prilagodljivimi delovnimi imeniki in kavlji za zagonske skripte.
 - **Namestitev distribucije**: Namestite Linux distribucije prek Microsoft Store, GitHub, lokalnih datotek (RootFS/VHDX) ali spletnih zrcal (s samodejnim testom hitrosti za izbor najhitrejšega zrcala in vgrajenim pomočnikom za prenos RootFS).
 - **Globalna varnost**: Zaklepanje Mutex za varne sočasne migracije/varnostne kopije in samodejno čiščenje Appx ob odstranitvi.
@@ -177,6 +180,18 @@ Dnevniške datoteke se zapisujejo v konfiguriran imenik in jih je mogoče prilo�
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Pripneta diska
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Načrtovanje opravil
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Prikaz delovanja
@@ -266,6 +281,20 @@ Prepričajte se, da imate nameščena orodja Rust (Rust 1.92+ ali novejša).
   - **Učinkovitost**: Izjemno nizka poraba virov (za podrobnosti glejte [Ključne lastnosti](#-ključne-lastnosti-in-uporaba)).
   - **Prenosljivost**: Optimizirana izdaja ustvari eno samo kompaktno izvršljivo datoteko.
 
+
+
+---
+
+## 📢 Uradne skupine skupnosti
+
+Dobrodošli v uradnih skupinah skupnosti WSL UI! Pridružite se nam za razprave o nasvetih, poročanje težav, spremljanje posodobitev in povezovanje z razvijalci ter drugimi uporabniki.
+
+| Globalna skupina (Telegram) | Kitajska skupina (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Skenirajte za vstop | Skenirajte za vstop |
+
+---
 
 
 ## 🤝 Podpora skupnosti

@@ -3,6 +3,7 @@
 
 use std::sync::Arc;
 use tokio::sync::Mutex;
+use tracing::info;
 use crate::{AppState, AppWindow};
 use crate::network;
 use slint::{ModelRc, SharedString, VecModel};
@@ -90,15 +91,16 @@ pub async fn refresh_network_view_data(app: slint::Weak<AppWindow>, app_state: A
     });
 }
 
-// Helper to show a task status toast with a 3-second auto-hide timer
+// Helper to show a task status toast with a 5-second auto-hide timer
 pub fn show_toast(app: slint::Weak<AppWindow>, text: String) {
+    info!("show_toast: '{}'", text);
     let _ = slint::invoke_from_event_loop(move || {
         if let Some(app_instance) = app.upgrade() {
             app_instance.set_task_status_text(text.into());
             app_instance.set_task_status_visible(true);
             
             let ah_hide = app.clone();
-            slint::Timer::single_shot(std::time::Duration::from_secs(3), move || {
+            slint::Timer::single_shot(std::time::Duration::from_secs(5), move || {
                 if let Some(app_h) = ah_hide.upgrade() {
                     app_h.set_task_status_visible(false);
                 }

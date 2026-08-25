@@ -21,6 +21,7 @@ static HELPER_SYNC_CACHE:   LazyLock<std::sync::Mutex<Option<CacheEntry<HelperSy
 static HELPER_BOOTSTRAP_CACHE: LazyLock<std::sync::Mutex<Option<CacheEntry<HelperBootstrapData>>>> = LazyLock::new(|| std::sync::Mutex::new(None));
 #[allow(dead_code)]
 static HELPER_SCHEDULER_CACHE: LazyLock<std::sync::Mutex<Option<CacheEntry<HelperSchedulerData>>>> = LazyLock::new(|| std::sync::Mutex::new(None));
+static HELPER_MOUNT_CACHE:  LazyLock<std::sync::Mutex<Option<CacheEntry<HelperMountDiskData>>>> = LazyLock::new(|| std::sync::Mutex::new(None));
 
 // Get wslui latest version
 pub fn wslui_latest_version() -> Result<ReleaseData, String> {
@@ -242,6 +243,27 @@ pub fn wslui_helper_scheduler() -> HelperSchedulerData {
         Err(e) => {
             error!("Failed to get helper crontab from wslui: {}. Using default data.", e);
             HelperSchedulerData::default()
+        }
+    }
+}
+
+// Get helper mount information (mount disk help link)
+pub fn wslui_helper_mount() -> HelperMountDiskData {
+    if let Some(data) = try_get_cache(&HELPER_MOUNT_CACHE) {
+        debug!("Returning cached helper mount data");
+        return data;
+    }
+
+    let client = WslUiClient::new();
+    match client.request_api1::<HelperMountDiskData>("GET", "/desktop/v1/helper/mount", None) {
+        Ok((resp, _)) => {
+            debug!("Obtained helper mount from wslui: {:?}", resp.data);
+            set_cache(&HELPER_MOUNT_CACHE, resp.data.clone(), CACHE_TTL_LONG);
+            resp.data
+        }
+        Err(e) => {
+            error!("Failed to get helper mount from wslui: {}. Using default data.", e);
+            HelperMountDiskData::default()
         }
     }
 }

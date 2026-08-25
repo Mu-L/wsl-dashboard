@@ -56,6 +56,16 @@ impl WslCommandExecutor {
         crate::wsl::ops::info::list_available_distros(self).await
     }
 
+    // Get list of running WSL distros (cross-locale safe)
+    pub async fn list_running_distros(&self) -> Vec<String> {
+        crate::wsl::ops::info::list_running_distros(self).await
+    }
+
+    // Get default WSL distro name (cross-locale safe)
+    pub async fn get_default_distro_name(&self) -> Option<String> {
+        crate::wsl::ops::info::get_default_distro_name(self).await
+    }
+
     // Open distribution's folder
     pub async fn open_distro_folder(&self, distro_name: &str) -> WslCommandResult<String> {
         crate::wsl::ops::ui::open_distro_folder(self, distro_name).await

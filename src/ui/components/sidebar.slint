@@ -12,6 +12,7 @@ export component Sidebar inherits Rectangle {
     in property <string> usb_text: "";
     in property <string> network_text: "";
     in property <string> scheduler_text: "";
+    in property <string> mount_text: "";
     in property <string> settings_text: "";
     in property <string> about_text: "";
     in property <string> donate_text: "";
@@ -21,6 +22,7 @@ export component Sidebar inherits Rectangle {
     in property <bool> show_usb: true;
     in property <bool> show_network: true;
     in property <bool> show_scheduler: true;
+    in property <bool> show_mount: true;
     in property <bool> show_donate: true;
     in property <bool> show_about: true;
     in property <bool> show_toggle: true;
@@ -128,6 +130,16 @@ export component Sidebar inherits Rectangle {
                 root.tab_selected(4);
             }
         }
+        if (root.show_mount): SidebarItem {
+            icon: "\u{e772}"; // Hard drive icon
+            icon_type: "sky";
+            text: root.mount_text;
+            selected: selected_tab == 5;
+            collapsed: root.collapsed;
+            clicked => {
+                root.tab_selected(5);
+            }
+        }
         Rectangle {
             vertical-stretch: 1;
         } // Spacer: Pushes everything below it to the bottom
@@ -141,10 +153,10 @@ export component Sidebar inherits Rectangle {
             icon: "\u{EB51}";
             icon_type: "heart";
             text: root.donate_text;
-            selected: selected_tab == 5;
+            selected: selected_tab == 6;
             collapsed: root.collapsed;
             clicked => {
-                root.tab_selected(5);
+                root.tab_selected(6);
             }
         }
 
@@ -163,10 +175,10 @@ export component Sidebar inherits Rectangle {
             icon: "\u{E713}";
             icon_type: "indigo";
             text: root.settings_text;
-            selected: selected_tab == 6;
+            selected: selected_tab == 7;
             collapsed: root.collapsed;
             clicked => {
-                root.tab_selected(6);
+                root.tab_selected(7);
             }
         }
 
@@ -174,10 +186,10 @@ export component Sidebar inherits Rectangle {
             icon: "\u{E9CE}";
             icon_type: "cyan";
             text: root.about_text;
-            selected: selected_tab == 7;
+            selected: selected_tab == 8;
             collapsed: root.collapsed;
             clicked => {
-                root.tab_selected(7);
+                root.tab_selected(8);
             }
         }
     }

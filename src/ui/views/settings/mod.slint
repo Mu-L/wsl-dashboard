@@ -69,9 +69,11 @@ export component SettingsView inherits Rectangle {
     in-out property <bool> sidebar_usb: true;
     in-out property <bool> sidebar_network: true;
     in-out property <bool> sidebar_scheduler: true;
+    in-out property <bool> sidebar_mount: true;
     in-out property <bool> sidebar_donate: true;
     in-out property <bool> sidebar_about: true;
     in-out property <bool> sparse_vhd: false;
+    in-out property <bool> mount_auto_probe: false;
     in-out property <bool> colorful_icons: false;
     in-out property <bool> mail_icon_always: true;
     in-out property <bool> hide_pin_icon: false;
@@ -229,6 +231,7 @@ export component SettingsView inherits Rectangle {
                             log_days_options: root.log-days-options;
                             auto_shutdown <=> root.auto_shutdown;
                             sparse_vhd <=> root.sparse_vhd;
+                            mount_auto_probe <=> root.mount_auto_probe;
                             select_distro_folder => { root.select-distro-folder(); }
                             select_logs_folder => { root.select-logs-folder(); }
                         }
@@ -254,6 +257,7 @@ export component SettingsView inherits Rectangle {
                             sidebar_usb <=> root.sidebar_usb;
                             sidebar_network <=> root.sidebar_network;
                             sidebar_scheduler <=> root.sidebar_scheduler;
+                            sidebar_mount <=> root.sidebar_mount;
                             sidebar_donate <=> root.sidebar_donate;
                             sidebar_about <=> root.sidebar_about;
                             system_color <=> root.system_color;

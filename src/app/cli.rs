@@ -42,11 +42,11 @@ pub async fn handle_context_commands(
 ) -> Option<i32> {
     // 4. Initial check for network sync command
     if let Some(pos) = args.iter().position(|a| a == "/scheduler") {
-        crate::app::scheduler::run_scheduler_task(args, pos, config_manager).await;
+        let exit_code = crate::app::scheduler::run_scheduler_task(args, pos, config_manager).await;
         
         // Ensure logs are flushed before exit
         drop(logging_system);
-        return Some(0);
+        return Some(exit_code);
     }
 
     // 4.7 Check for clean command

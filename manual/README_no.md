@@ -40,6 +40,7 @@ I18N :  [English](../README.md) | [简体中文](./README_zh_CN.md) | [繁體中
 - [💻 Systemkrav](#-systemkrav)
 - [📦 Installasjonsguide](#-installasjonsguide)
 - [🛠️ Teknologistakk og ytelse](#️-teknologistakk-og-ytelse)
+- [📢 Offisielle fellesskapsgrupper](#-offisielle-fellesskapsgrupper)
 - [🤝 Fellesskapsstøtte](#-fellesskapsstøtte)
 - [❤️ Støtt dette prosjektet](#️-støtt-dette-prosjektet)
 - [⭐️ Kjærlighetsarbeid](#️-kjærlighetsarbeid)
@@ -110,8 +111,10 @@ Engelsk, Kinesisk (Forenklet), Kinesisk (Tradisjonell), Hindi, Spansk, Fransk, A
 - **Moderne nativt brukergrensesnitt**: Intuitivt GUI med støtte for mørk/lys modus, glatte animasjoner og høy ytelse drevet av **Skia**.
 - **Systemstatusfelt-integrasjon**: Full støtte for minimering til systemfeltet (~10 MB RAM-bruk), dobbeltklikk for å åpne vinduet, og en funksjonell høyreklikksmeny.
 - **Intelligent oppstart**: Konfigurer kontrollpanelet til å starte med Windows, minimere til systemfeltet (stille modus med `/silent`), og automatisk avslutning av distribusjoner ved utgang.
+- **Oppgaveplanlegging**: Fleksibel oppgaveplanlegging som støtter automatisk utførelse av skript og kommandoer i WSL-instanser på angitte tidspunkter eller intervaller for automatiserte operasjoner.
 - **Omfattende instanskontroll**: Start, stopp, terminer og avregistrer med ett klikk. Statusovervåking i sanntid og detaljert innsikt i diskbruk og filplasseringer.
 - **Distribusjonsadministrasjon**: Sett som standard, migrering (flytt VHDX til andre stasjoner), og eksport/kloning til `.tar` eller `.tar.gz`-arkiver.
+- **Diskmontering**: Monter og administrer VHDX-virtuelle disker for WSL-instanser direkte, med støtte for montering, avmontering og diskadministrasjonsoperasjoner, noe som gjør det enkelt å overføre filer mellom verten og WSL.
 - **Hurtigintegrasjon**: Umiddelbar start i Terminal, VS Code eller Filutforsker med tilpassbare arbeidsmapper og oppstartsskript-huker.
 - **Distribusjonsinstallasjon**: Installer Linux-distribusjoner via Microsoft Store, GitHub, lokale filer (RootFS/VHDX) eller nettbaserte speil (med automatisk hastighetstest for å velge det raskeste speilet og innebygd RootFS-nedlastingshjelper).
 - **Global sikkerhet**: Mutex-låser for sikre samtidige migrerings-/sikkerhetskopieringsoperasjoner og automatisk Appx-opprydding ved fjerning.
@@ -176,6 +179,18 @@ Loggfiler skrives til den konfigurerte loggmappen og kan legges ved når du rapp
 <p align="center">
   <img src="../assets/screenshot/about.png" width="48%" />
   <img src="../assets/screenshot/donate.png" width="48%" />
+</p>
+
+### Diskmontering
+<p align="center">
+  <img src="../assets/screenshot/mount.png" width="48%" />
+  <img src="../assets/screenshot/mount-add.png" width="48%" />
+</p>
+
+### Oppgaveplanlegging
+<p align="center">
+  <img src="../assets/screenshot/task.png" width="48%" />
+  <img src="../assets/screenshot/task-add.png" width="48%" />
 </p>
 
 ## 🎬 Demonstasjon
@@ -266,6 +281,17 @@ Sørg for at du har Rust-verktøykjeden (Rust 1.92+ eller nyere) installert.
   - **Portabilitet**: Optimalisert produksjonsbygg produserer en enkelt kompakt kjørbar fil.
 
 
+
+## 📢 Offisielle fellesskapsgrupper
+
+Velkommen til de offisielle WSL UI fellesskapsgruppene! Bli med i kanalene våre for å diskutere brukstips, rapportere problemer, få de nyeste oppdateringene og koble deg til utviklere og andre brukere.
+
+| Global gruppe (Telegram) | Kinesisk gruppe (WeChat) |
+| :---: | :---: |
+| <img src="https://cdn1.wslui.com/static/images/group/group-telegram.png" width="240" alt="Telegram Group QR Code" /> | <img src="https://cdn1.wslui.com/static/images/group/group-wechat.png" width="240" alt="WeChat Group QR Code" /> |
+| Skann for å bli med | Skann for å bli med |
+
+---
 
 ## 🤝 Fellesskapsstøtte
 

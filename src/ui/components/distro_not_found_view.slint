@@ -24,37 +24,16 @@ export component DistroNotFoundView inherits VerticalLayout {
         height: 32px;
         if (root.guide_url != ""): HorizontalLayout {
             alignment: center;
-            Rectangle {
-                height: 32px;
-                min-width: 180px;
-                background: link_touch.has-hover ? Theme.hover_bg : Theme.card_bg;
-                border-radius: 4px;
-                border-width: 1px;
-                border-color: Theme.accent;
+            Text {
                 link_touch := TouchArea {
                     mouse-cursor: pointer;
                     clicked => { root.open_url(root.guide_url); }
                 }
-                HorizontalLayout {
-                    padding-left: 12px;
-                    padding-right: 12px;
-                    spacing: 6px;
-                    alignment: center;
-                    Text {
-                        text: "\u{E774}";
-                        font-family: Theme.icon_font;
-                        font-size: 14px;
-                        color: Theme.accent;
-                        vertical-alignment: center;
-                    }
-                    Text {
-                        text: AppI18n.t("main.guide_link", [AppI18n.version]);
-                        color: Theme.accent;
-                        font-family: Theme.default_font;
-                        font-size: 13px * LayoutConstants.font-scale;
-                        vertical-alignment: center;
-                    }
-                }
+                text: AppI18n.t("main.guide_link", [AppI18n.version]);
+                color: Theme.accent;
+                font-family: Theme.default_font;
+                font-size: 13px * LayoutConstants.font-scale;
+                vertical-alignment: center;
             }
         }
     }
